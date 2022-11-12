@@ -9,6 +9,7 @@ const CONTAINER = document.querySelector(".container");
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
+  console.log(movies.results);
 };
 
 // Don't touch this function please
@@ -31,12 +32,26 @@ const fetchMovies = async () => {
   return res.json();
 };
 
+
+// This function is to fetch genres.
+const fetchGenre = async () => {
+  const url = constructUrl("genre/movie/list");
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.genres);
+  return data.genres;
+};
+fetchGenre();
+
+
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
   const url = constructUrl(`movie/${movieId}`);
   const res = await fetch(url);
   return res.json();
 };
+
+
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
