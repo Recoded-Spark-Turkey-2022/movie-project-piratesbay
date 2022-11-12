@@ -43,6 +43,16 @@ const fetchGenre = async () => {
 };
 fetchGenre();
 
+// This function is the fetch actors.
+const fetchActors = async () => {
+  const url = constructUrl(`person/popular`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchActors();
+
 
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
