@@ -43,7 +43,7 @@ const fetchGenre = async () => {
 };
 fetchGenre();
 
-// This function is the fetch actors.
+// This function is to fetch actors.
 const fetchActors = async () => {
   const url = constructUrl(`person/popular`);
   const res = await fetch(url);
@@ -52,6 +52,16 @@ const fetchActors = async () => {
   return data.results;
 };
 fetchActors();
+
+// This fetch is to fetch popular movies.
+const fetchPopularMovies = async () => {
+  const url = constructUrl(`movie/popular`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchPopularMovies();
 
 
 // Don't touch this function please. This function is to fetch one movie.
