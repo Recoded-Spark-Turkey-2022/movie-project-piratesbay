@@ -85,6 +85,16 @@ const fetchUpComing = async () => {
 fetchUpComing();
 
 
+// This function is to fetch movie cast.
+const fetchCast = async () => {
+  const url = constructUrl(`movie/${movie_id}/credits`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.cast);
+  return data.cast;
+};
+fetchCast();
+
 
 // const fetchActor = async (person_id) => {
 //   const url = constructUrl(`person/${person_id}`);
@@ -98,7 +108,7 @@ fetchUpComing();
 
 // This function is to fetch trailers.
 const fetchVideos = async () => {
-  const url = constructUrl(`movie/${movie.id}/videos`);
+  const url = constructUrl(`movie/${movie_id}/videos`);
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results);
@@ -109,7 +119,7 @@ fetchVideos();
 
 // This function is to fetch similar movies.
 const fetchSimilarMovies = async () => {
-  const url = constructUrl(`movie/${movie.id}/similar`);
+  const url = constructUrl(`movie/${movie_id}/similar`);
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results);
