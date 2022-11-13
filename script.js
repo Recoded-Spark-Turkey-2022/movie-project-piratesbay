@@ -73,6 +73,19 @@ const fetchTopRated = async () => {
 };
 fetchTopRated();
 
+
+// This function is to fetch upcoming movies.
+const fetchUpComing = async () => {
+  const url = constructUrl(`movie/upcoming`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchUpComing();
+
+
+
 // const fetchActor = async (actorId) => {
 //   const url = constructUrl(`person/${actorId}/movie_credits`);
 //   const res = await fetch(url);
