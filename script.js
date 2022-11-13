@@ -96,14 +96,15 @@ const fetchCast = async () => {
 fetchCast();
 
 
-// const fetchActor = async (person_id) => {
-//   const url = constructUrl(`person/${person_id}`);
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   console.log(data);
-//   // return data.results;
-// };
-// fetchActor();
+// This function is to fetch actor.
+const fetchActor = async () => {
+  const url = constructUrl(`person/${person_id}`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data);
+  return data;
+};
+fetchActor();
 
 
 // This function is to fetch trailers.
