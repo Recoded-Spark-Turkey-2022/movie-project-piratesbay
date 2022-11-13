@@ -63,6 +63,34 @@ const fetchPopularMovies = async () => {
 };
 fetchPopularMovies();
 
+// This function is to fetch Top rated movies.
+const fetchTopRated = async () => {
+  const url = constructUrl(`movie/top_rated`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchTopRated();
+
+// const fetchActor = async (actorId) => {
+//   const url = constructUrl(`person/${actorId}/movie_credits`);
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   console.log(data);
+//   // return data.results;
+// };
+// fetchActor();
+
+
+// const fetchVideos = async () => {
+//   const url = constructUrl(`movie/${movie_id}/videos`);
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   console.log(data.results);
+//   // return data.results;
+// };
+// fetchVideos();
 
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
