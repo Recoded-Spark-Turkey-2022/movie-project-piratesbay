@@ -86,8 +86,8 @@ fetchUpComing();
 
 
 
-// const fetchActor = async (actorId) => {
-//   const url = constructUrl(`person/${actorId}/movie_credits`);
+// const fetchActor = async (person_id) => {
+//   const url = constructUrl(`person/${person_id}`);
 //   const res = await fetch(url);
 //   const data = await res.json();
 //   console.log(data);
@@ -96,14 +96,26 @@ fetchUpComing();
 // fetchActor();
 
 
-// const fetchVideos = async () => {
-//   const url = constructUrl(`movie/${movie_id}/videos`);
+// This function is to fetch trailers.
+const fetchVideos = async () => {
+  const url = constructUrl(`movie/${movie.id}/videos`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchVideos();
+
+
+// // This function is to fetch similar movies.
+// const fetchSimilarMovies = async () => {
+//   const url = constructUrl(`movie/${movie.id}/similar`);
 //   const res = await fetch(url);
 //   const data = await res.json();
-//   console.log(data.results);
-//   // return data.results;
+//   // console.log(data.results);
+//   return data.results;
 // };
-// fetchVideos();
+// fetchSimilarMovies();
 
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
@@ -147,6 +159,8 @@ const renderMovie = (movie) => {
             <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
             <h3>Overview:</h3>
             <p id="movie-overview">${movie.overview}</p>
+            <h3>vote_average:</h3>
+            <p id="movie-vote_average">${movie.vote_average}</p>
         </div>
         </div>
             <h3>Actors:</h3>
