@@ -107,15 +107,15 @@ const fetchVideos = async () => {
 fetchVideos();
 
 
-// // This function is to fetch similar movies.
-// const fetchSimilarMovies = async () => {
-//   const url = constructUrl(`movie/${movie.id}/similar`);
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   // console.log(data.results);
-//   return data.results;
-// };
-// fetchSimilarMovies();
+// This function is to fetch similar movies.
+const fetchSimilarMovies = async () => {
+  const url = constructUrl(`movie/${movie.id}/similar`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchSimilarMovies();
 
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
