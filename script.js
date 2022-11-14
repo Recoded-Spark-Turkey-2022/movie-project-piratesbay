@@ -114,3 +114,9 @@ document.onkeydown = (e) => {
 document.onkeyup = (e) => {
   isKeyPressed[e.key] = false;
 };
+
+
+const button = document.querySelector('.trailer');
+button.addEventListener('click', (e) => {
+  window.open('https://www.youtube.com/watch?v=umIeYcQLABg', '_blank');
+});
