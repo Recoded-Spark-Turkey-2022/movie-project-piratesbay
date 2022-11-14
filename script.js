@@ -63,8 +63,9 @@ const fetchPopularMovies = async () => {
   const url = constructUrl(`movie/popular`);
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data.results);
-  // return data.results;
+  // console.log(data.results);
+  return data.results;
+ 
 };
 fetchPopularMovies();
 
@@ -159,6 +160,8 @@ const renderMovies = (movies) => {
   });
 };
 
+
+
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie) => {
   CONTAINER.innerHTML = `
@@ -229,7 +232,8 @@ button.addEventListener('click', (e) => {
 
 
 const arrows = document.querySelectorAll(".arrow");
-const movieLists = document.querySelectorAll(".movieDiv");
+const movieLists = document.querySelectorAll(".superContainer");
+console.log(movieLists);
 
 arrows.forEach((arrow, i) => {
   const itemNumber = movieLists[i].querySelectorAll(".movieImage").length;
