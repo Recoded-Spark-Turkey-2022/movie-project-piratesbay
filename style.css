@@ -106,4 +106,15 @@ input {
     display: block;
 }
 
+nav img {
+    height: 80px;
+    width: auto;
+}
+
+h4 {
+    font-family: 'Pirata One', cursive;
+    text-align: center;
+    margin-top: 5px;
+}
+
 
