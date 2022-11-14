@@ -43,6 +43,7 @@ const fetchMovie = async (movieId) => {
 const renderMovies = (movies) => {
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
+    movieDiv.setAttribute("class","movieDiv");
     movieDiv.innerHTML = `
         <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
       movie.title
