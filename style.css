@@ -165,9 +165,8 @@ input {
     left: 200px;
     width: 50%;
     margin-left: 10px;
-   
-    
 }
+
 nav img {
     height: 70px;
     width: auto;
@@ -211,4 +210,7 @@ h4 {
 
 h3 {
     color: #ddd;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 }
