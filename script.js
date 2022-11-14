@@ -94,3 +94,23 @@ window.onclick = function(e) {
     }
   }
 }
+
+//Shortcut for moving the cursor to the search box
+const searchInput = document.getElementById("search-input");
+
+let isKeyPressed = { 
+  'a': false, // ASCII code for 'a'
+  'q': false, // ASCII code for 'k'
+   // ... Other key codes you want to track
+};
+
+document.onkeydown = (e) => {
+  isKeyPressed[e.key] = true; 
+  if (e.ctrlKey && isKeyPressed["q"]) {
+    searchInput.focus();
+  }
+};
+
+document.onkeyup = (e) => {
+  isKeyPressed[e.key] = false;
+};
