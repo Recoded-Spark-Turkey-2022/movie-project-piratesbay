@@ -21,10 +21,7 @@ body {
 
 .container {
     padding-top: 32px;
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around; */
+    
 }
 
 #actors {
@@ -195,7 +192,7 @@ h4 {
     display: flex;
     align-items: center;
     float: left;
-    margin-top: 50px;
+    margin-top: 30px;
     height: 300px;
     transform: translateX(0);
     transition: all 1s ease-in-out;
@@ -208,6 +205,10 @@ h4 {
 
 .movieImage {
     border-radius: 50px;
-    width: 370px;
-    height: 300px;
+    width: 300px;
+    height: 250px;
+}
+
+h3 {
+    color: #ddd;
 }
