@@ -80,17 +80,16 @@ const renderMovie = (movie) => {
 
 document.addEventListener("DOMContentLoaded", autorun);
 
-const dropDownButton = document.querySelector("button.dropbtn")
-dropDownButton.addEventListener("click", myFunction)
-
-function myFunction() {
-  dropDownButton.classList.toggle("show");
-}
+const dropDownButton = document.querySelector(".dropbtn")
+const dropDownContent = document.querySelector(".dropdown-content")
+dropDownButton.addEventListener("click", () => {
+  dropDownContent.classList.toggle("show")
+})
 
 window.onclick = function(e) {
   if (!e.target.matches('.dropbtn')) {
-    if (dropDownButton.classList.contains('show')) {
-      dropDownButton.classList.remove('show');
+    if (dropDownContent.classList.contains('show')) {
+      dropDownContent.classList.remove('show');
     }
   }
 }
