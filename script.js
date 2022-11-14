@@ -59,9 +59,9 @@ const renderMovie = (movie) => {
   CONTAINER.innerHTML = `
     <div class="row">
         <div class="col-md-4">
-             <img id="movie-backdrop" src=${
-               BACKDROP_BASE_URL + movie.backdrop_path
-             }>
+            <img id="movie-backdrop" src=${
+              BACKDROP_BASE_URL + movie.backdrop_path
+            }>
         </div>
         <div class="col-md-8">
             <h2 id="movie-title">${movie.title}</h2>
@@ -79,3 +79,18 @@ const renderMovie = (movie) => {
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
+
+const dropDownButton = document.querySelector("button.dropbtn")
+dropDownButton.addEventListener("click", myFunction)
+
+function myFunction() {
+  dropDownButton.classList.toggle("show");
+}
+
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+    if (dropDownButton.classList.contains('show')) {
+      dropDownButton.classList.remove('show');
+    }
+  }
+}
