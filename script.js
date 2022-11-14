@@ -9,14 +9,10 @@ const CONTAINER = document.querySelector(".container");
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
-  console.log(movies.results);
 };
 
 // Don't touch this function please
 const constructUrl = (path) => {
-  console.log(atob(
-    "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
-  ))
   return `${TMDB_BASE_URL}/${path}?api_key=${atob(
     "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
   )}`;
@@ -35,12 +31,116 @@ const fetchMovies = async () => {
   return res.json();
 };
 
+
+// This function is to fetch genres.
+const fetchGenre = async () => {
+  const dropDownContent = document.querySelector(".dropdown-content")
+  const url = constructUrl("genre/movie/list");
+  const res = await fetch(url);
+  const data = await res.json();
+  //console.log(data.genres);
+  data.genres.forEach(element => {
+    const genreLink = document.createElement("a");
+    genreLink.textContent = element.name
+    genreLink.classList.add("genre")
+    dropDownContent.appendChild(genreLink);
+  });
+};
+fetchGenre();
+
+// This function is to fetch actors.
+const fetchActors = async () => {
+  const url = constructUrl(`person/popular`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchActors();
+
+// This fetch is to fetch popular movies.
+const fetchPopularMovies = async () => {
+  const url = constructUrl(`movie/popular`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchPopularMovies();
+
+// This function is to fetch Top rated movies.
+const fetchTopRated = async () => {
+  const url = constructUrl(`movie/top_rated`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchTopRated();
+
+
+// This function is to fetch upcoming movies.
+const fetchUpComing = async () => {
+  const url = constructUrl(`movie/upcoming`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchUpComing();
+
+
+// This function is to fetch movie cast.
+const fetchCast = async () => {
+  const url = constructUrl(`movie/${movie_id}/credits`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.cast);
+  return data.cast;
+};
+fetchCast();
+
+
+// This function is to fetch actor.
+const fetchActor = async () => {
+  const url = constructUrl(`person/${person_id}`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data);
+  return data;
+};
+fetchActor();
+
+
+// This function is to fetch trailers.
+const fetchVideos = async () => {
+  const url = constructUrl(`movie/${movie_id}/videos`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchVideos();
+
+
+// This function is to fetch similar movies.
+const fetchSimilarMovies = async () => {
+  const url = constructUrl(`movie/${movie_id}/similar`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results);
+  return data.results;
+};
+fetchSimilarMovies();
+
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
   const url = constructUrl(`movie/${movieId}`);
   const res = await fetch(url);
   return res.json();
 };
+
+
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
@@ -75,6 +175,8 @@ const renderMovie = (movie) => {
             <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
             <h3>Overview:</h3>
             <p id="movie-overview">${movie.overview}</p>
+            <h3>vote_average:</h3>
+            <p id="movie-vote_average">${movie.vote_average}</p>
         </div>
         </div>
             <h3>Actors:</h3>
