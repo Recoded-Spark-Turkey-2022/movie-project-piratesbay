@@ -152,3 +152,21 @@ input {
     
 }
 
+.trailer {
+    background-color: red;
+    font-size: 12px;
+    color: azure;
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.trailerContainer {
+    position: relative;
+    top: 250px;
+    left: 200px;
+    width: 50%;
+    margin-left: 10px;
+   
+    
+}
