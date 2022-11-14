@@ -63,8 +63,8 @@ const fetchPopularMovies = async () => {
   const url = constructUrl(`movie/popular`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
-  return data.results;
+  console.log(data.results);
+  // return data.results;
 };
 fetchPopularMovies();
 
@@ -225,4 +225,27 @@ document.onkeyup = (e) => {
 const button = document.querySelector('.trailer');
 button.addEventListener('click', (e) => {
   window.open('https://www.youtube.com/watch?v=umIeYcQLABg', '_blank');
+});
+
+
+const arrows = document.querySelectorAll(".arrow");
+const movieLists = document.querySelectorAll(".movieDiv");
+
+arrows.forEach((arrow, i) => {
+  const itemNumber = movieLists[i].querySelectorAll(".movieImage").length;
+  let clickCounter = 0;
+  arrow.addEventListener("click", () => {
+    const ratio = Math.floor(window.innerWidth / 270);
+    clickCounter++;
+    if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
+      movieLists[i].style.transform = `translateX(${
+        movieLists[i].computedStyleMap().get("transform")[0].x.value - 300
+      }px)`;
+    } else {
+      movieLists[i].style.transform = "translateX(0)";
+      clickCounter = 0;
+    }
+  });
+
+  console.log(Math.floor(window.innerWidth / 270));
 });
