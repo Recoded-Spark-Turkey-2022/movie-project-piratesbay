@@ -63,12 +63,14 @@ a {
 }
 
 input {
-    border-radius: 14px;
+    border-radius: 5px;
 }
 
 .dropbtn {
-    background-color: #3498DB;
-    color: white;
+    background: none;
+    outline: inherit;
+    color: inherit;
+    font: inherit;
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -92,7 +94,9 @@ input {
     text-decoration: none;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {
+    background-color: #ddd;
+}
 
 .dropbtn:hover, .dropbtn:focus {
     background-color: #2980B9;
