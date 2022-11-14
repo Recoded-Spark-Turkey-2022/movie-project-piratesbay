@@ -170,3 +170,15 @@ input {
    
     
 }
+nav img {
+    height: 70px;
+    width: auto;
+    margin-top: 10px;
+}
+
+h4 {
+    font-family: 'Pirata One', cursive;
+    text-align: center;
+    margin-top: 5px;
+}
+
