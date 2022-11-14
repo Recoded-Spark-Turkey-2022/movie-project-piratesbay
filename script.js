@@ -9,6 +9,7 @@ const CONTAINER = document.querySelector(".container");
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
+  console.log(movies.results);
 };
 
 // Don't touch this function please
