@@ -21,10 +21,10 @@ body {
 
 .container {
     padding-top: 32px;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; */
 }
 
 #actors {
@@ -186,7 +186,28 @@ h4 {
 .movie-list-title {
     font-size: 30px;
     color: #ddd;
-    padding-left: 20px;
+    padding-left: 50px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+
+.container {
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-top: 50px;
+    height: 300px;
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+}
+
+.movieDiv {
+    margin-right: 30px;
+  position: relative;
+}
+
+.movieImage {
+    border-radius: 50px;
+    width: 370px;
+    height: 300px;
+}
