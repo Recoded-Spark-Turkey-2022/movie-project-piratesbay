@@ -21,7 +21,7 @@ body {
 
 .container {
     padding-top: 200px;
-    padding-bottom: 600px;
+    padding-bottom: 800px;
     padding-left: 32px;
     width: 100%;
     overflow: hidden;
@@ -267,20 +267,50 @@ h3 {
     display: flex;
     align-items: center;
     position: absolute;
-   
 }
 
 .castContainer {
     display: flex;
     align-items: center;
-    /* position: absolute; */
 }
 
 .eachActor {
-    display: flex;
-    align-items: center;
+    padding: 20px;
     transform: translateX(0);
     position: relative;
     left: 50px;
     top: 300px;
+
+}
+
+.actorName {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.relatedMoviesContainer {
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+.eachMovie {
+    padding: 20px;
+    transform: translateX(0);
+    position: relative;
+    left: 50px;
+    top: 600px;
+
+}
+
+.relatedContainer {
+    display: flex;
+    align-items: center;
+}
+
+.movieName {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
 }
