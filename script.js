@@ -24,9 +24,9 @@ const constructUrl = (path) => {
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
   const movieCast = await fetchCast(movie.id);
-  // const movieTrailer = await fetchVideos(movie.id);
+  const movieTrailer = await fetchVideos(movie.id);
   const relatedMovies = await fetchSimilarMovies(movie.id);
-  renderMovie(movieRes,movieCast,relatedMovies);
+  renderMovie(movieRes,movieCast,relatedMovies,movieTrailer);
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
@@ -168,7 +168,7 @@ const renderMovies = (movies) => {
 
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie,movieCast,relatedMovies) => {
+const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
   console.log(relatedMovies);
   CONTAINER.innerHTML = `
     <div class="row">
@@ -194,10 +194,10 @@ const renderMovie = (movie,movieCast,relatedMovies) => {
             </div>
             
         
-        <div class="movieTrailer">
+        
             <h3>Trailer:</h3>
             <div class="trailerContainer"></div>
-        </div>
+       
 
        
             <h3>Similar Movies:</h3>
@@ -207,7 +207,7 @@ const renderMovie = (movie,movieCast,relatedMovies) => {
 
     </div>`;
     renderCast(movieCast);
-    // renderTrailer(movieTrailer);
+    renderTrailer(movieTrailer);
     renderRelatedMovies(relatedMovies);
 
 };
@@ -250,6 +250,24 @@ const renderRelatedMovies = (relatedMovies) => {
   });
 }
 
+
+const renderTrailer = (movieTrailer) => {
+  const trailer = document.querySelector(".trailerContainer");
+  movieTrailer.slice(1,2).map ((video)=> {
+    const trailerContainer = document.createElement("div");
+    trailerContainer.setAttribute("class","trailerContainer");
+    const eachTrailer = document.createElement("div");
+    eachTrailer.setAttribute("class","eachTrailer");
+    eachTrailer.innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer.trailer}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `
+    // eachActor.addEventListener("click", (e)=>{
+    //   movieDetails();
+    // })
+
+    trailerContainer.appendChild(eachTrailer);
+    trailer.appendChild(trailerContainer);
+  });
+}
 
 
 
