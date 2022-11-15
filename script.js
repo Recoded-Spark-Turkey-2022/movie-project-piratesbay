@@ -232,11 +232,11 @@ button.addEventListener('click', (e) => {
 
 
 const arrows = document.querySelectorAll(".arrow");
-const movieLists = document.querySelectorAll(".superContainer");
+const movieLists = document.querySelectorAll(".container");
 console.log(movieLists);
 
 arrows.forEach((arrow, i) => {
-  const itemNumber = movieLists[i].querySelectorAll(".movieImage").length;
+  const itemNumber = movieLists[i].querySelectorAll(".movieDiv").length;
   let clickCounter = 0;
   arrow.addEventListener("click", () => {
     const ratio = Math.floor(window.innerWidth / 270);
