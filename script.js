@@ -44,6 +44,15 @@ const fetchGenre = async () => {
     genreLink.textContent = element.name
     genreLink.classList.add("genre")
     dropDownContent.appendChild(genreLink);
+
+    //Fetching the required genre of movies when its name clicked 
+    genreLink.addEventListener("click", () => {
+      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}&with_genres=${element.id}`)
+      .then(resp => resp.json())
+      .then(data => console.log(data.results))
+    })
   });
 };
 fetchGenre();
@@ -219,3 +228,6 @@ document.onkeydown = (e) => {
 document.onkeyup = (e) => {
   isKeyPressed[e.key] = false;
 };
+
+
+
