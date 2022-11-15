@@ -20,6 +20,8 @@ body {
 
 .container {
     padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 32px;
     width: 100%;
     overflow: hidden;
     
@@ -209,10 +211,19 @@ h4 {
   position: relative;
 }
 
+.movieDiv:hover .movieImage {
+    transform: scale(1.2);
+    margin: 0 30px;
+    cursor: pointer;
+    
+    
+}
+
 .movieImage {
     border-radius: 50px;
     width: 250px;
-    height: 200px;
+    height: 250px;
+    transition: 1s all ease-in-out;
 }
 
 h3 {
@@ -221,6 +232,7 @@ h3 {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    display: none;
 }
 
 .arrow {
