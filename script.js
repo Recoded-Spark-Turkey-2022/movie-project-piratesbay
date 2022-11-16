@@ -32,13 +32,13 @@ const fetchMovies = async () => {
 };
 
 
-// This function is to fetch genres.
+// Fetch genres
 const fetchGenre = async () => {
   const dropDownContent = document.querySelector(".dropdown-content")
   const url = constructUrl("genre/movie/list");
   const res = await fetch(url);
   const data = await res.json();
-  //console.log(data.genres);
+  
   data.genres.forEach(element => {
     const genreLink = document.createElement("a");
     genreLink.textContent = element.name
@@ -51,7 +51,7 @@ const fetchGenre = async () => {
         "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
       )}&with_genres=${element.id}`)
       .then(resp => resp.json())
-      .then(data => console.log(data.results))
+      .then(data => renderMovies(data.results))
     })
   });
 };
@@ -65,27 +65,27 @@ const fetchActors = async () => {
   // console.log(data.results);
   return data.results;
 };
-fetchActors();
+//fetchActors();
 
 // This fetch is to fetch popular movies.
 const fetchPopularMovies = async () => {
   const url = constructUrl(`movie/popular`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
+  console.log(data.results);
   return data.results;
 };
-fetchPopularMovies();
+//fetchPopularMovies();
 
 // This function is to fetch Top rated movies.
 const fetchTopRated = async () => {
   const url = constructUrl(`movie/top_rated`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
+  console.log(data.results);
   return data.results;
 };
-fetchTopRated();
+//fetchTopRated();
 
 
 // This function is to fetch upcoming movies.
@@ -93,10 +93,10 @@ const fetchUpComing = async () => {
   const url = constructUrl(`movie/upcoming`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
+  //console.log(data.results);
   return data.results;
 };
-fetchUpComing();
+//fetchUpComing();
 
 
 // This function is to fetch movie cast.
@@ -107,7 +107,7 @@ const fetchCast = async () => {
   // console.log(data.cast);
   return data.cast;
 };
-fetchCast();
+//fetchCast();
 
 
 // This function is to fetch actor.
@@ -118,7 +118,7 @@ const fetchActor = async () => {
   // console.log(data);
   return data;
 };
-fetchActor();
+//fetchActor();
 
 
 // This function is to fetch trailers.
@@ -129,7 +129,7 @@ const fetchVideos = async () => {
   // console.log(data.results);
   return data.results;
 };
-fetchVideos();
+//fetchVideos();
 
 
 // This function is to fetch similar movies.
@@ -140,7 +140,7 @@ const fetchSimilarMovies = async () => {
   // console.log(data.results);
   return data.results;
 };
-fetchSimilarMovies();
+//fetchSimilarMovies();
 
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
@@ -153,6 +153,7 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+  CONTAINER.innerHTML = ""
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
@@ -195,19 +196,74 @@ const renderMovie = (movie) => {
 
 document.addEventListener("DOMContentLoaded", autorun);
 
-const dropDownButton = document.querySelector(".dropbtn")
+
+
+
+// Filter dropdown
+const dropDownButtons = document.querySelectorAll(".dropbtn")
 const dropDownContent = document.querySelector(".dropdown-content")
-dropDownButton.addEventListener("click", () => {
-  dropDownContent.classList.toggle("show")
+const filterDropDown = document.querySelector(".filter-dropdown-content")
+
+filterDropDown.childNodes.forEach(link => {
+  link.addEventListener("click", () => {
+    if (link.textContent === "Up coming") {
+      fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Popular") {
+      fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Now playing") {
+      fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Top rated") {
+      fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    }
+  })
+})
+
+// Dropdown clicks
+dropDownButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    if (e.target.textContent === "Genre ") {
+      dropDownContent.classList.toggle("show")
+    } else if (e.target.textContent === "Filter ") {
+      filterDropDown.classList.toggle("show")
+    }
+  })
 })
 
 window.onclick = function(e) {
   if (!e.target.matches('.dropbtn')) {
     if (dropDownContent.classList.contains('show')) {
       dropDownContent.classList.remove('show');
+    } else if (filterDropDown.classList.contains('show')) {
+      filterDropDown.classList.remove('show');
     }
   }
 }
+
+// Actors fetch and listening
+const actorLink = document.getElementById("actor-link")
+actorLink.addEventListener("click", () => {
+  fetch(`${TMDB_BASE_URL}/person/popular?api_key=${atob(
+    "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+  )}`)
+  .then(resp => resp.json())
+  .then(data => renderMovies(data.results))
+})
 
 //Shortcut for moving the cursor to the search box
 const searchInput = document.getElementById("search-input");
