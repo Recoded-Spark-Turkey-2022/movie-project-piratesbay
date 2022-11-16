@@ -44,15 +44,24 @@ const fetchGenre = async () => {
   const url = constructUrl("genre/movie/list");
   const res = await fetch(url);
   const data = await res.json();
-  //console.log(data.genres);
+  
   data.genres.forEach(element => {
     const genreLink = document.createElement("a");
     genreLink.textContent = element.name
     genreLink.classList.add("genre")
     dropDownContent.appendChild(genreLink);
+
+    //Fetching the required genre of movies when its name clicked 
+    genreLink.addEventListener("click", () => {
+      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}&with_genres=${element.id}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    })
   });
 };
-// fetchGenre();
+fetchGenre();
 
 
 // This fetch is to fetch popular movies.
@@ -369,19 +378,71 @@ const renderActor = (actor) => {
 
 document.addEventListener("DOMContentLoaded", autorun);
 
-const dropDownButton = document.querySelector(".dropbtn")
+// Filter dropdown
+const dropDownButtons = document.querySelectorAll(".dropbtn")
 const dropDownContent = document.querySelector(".dropdown-content")
-dropDownButton.addEventListener("click", () => {
-  dropDownContent.classList.toggle("show")
+const filterDropDown = document.querySelector(".filter-dropdown-content")
+
+filterDropDown.childNodes.forEach(link => {
+  link.addEventListener("click", () => {
+    if (link.textContent === "Up coming") {
+      fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Popular") {
+      fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Now playing") {
+      fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Top rated") {
+      fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    }
+  })
+})
+
+// Dropdown clicks
+dropDownButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    if (e.target.textContent === "Genre ") {
+      dropDownContent.classList.toggle("show")
+    } else if (e.target.textContent === "Filter ") {
+      filterDropDown.classList.toggle("show")
+    }
+  })
 })
 
 window.onclick = function(e) {
   if (!e.target.matches('.dropbtn')) {
     if (dropDownContent.classList.contains('show')) {
       dropDownContent.classList.remove('show');
+    } else if (filterDropDown.classList.contains('show')) {
+      filterDropDown.classList.remove('show');
     }
   }
 }
+
+// Actors fetch and listening
+const actorLink = document.getElementById("actor-link")
+actorLink.addEventListener("click", () => {
+  fetch(`${TMDB_BASE_URL}/person/popular?api_key=${atob(
+    "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+  )}`)
+  .then(resp => resp.json())
+  .then(data => renderMovies(data.results))
+})
 
 //Shortcut for moving the cursor to the search box
 const searchInput = document.getElementById("search-input");
@@ -404,31 +465,10 @@ document.onkeyup = (e) => {
 };
 
 
+
 const button = document.querySelector('.trailer');
 button.addEventListener('click', (e) => {
   window.open('https://www.youtube.com/watch?v=umIeYcQLABg', '_blank');
 });
 
 
-const arrows = document.querySelectorAll(".arrow");
-const movieLists = document.querySelectorAll(".container");
-// console.log(movieLists);
-
-arrows.forEach((arrow, i) => {
-  const itemNumber = movieLists[i].querySelectorAll(".movieDiv").length;
-  let clickCounter = 0;
-  arrow.addEventListener("click", () => {
-    const ratio = Math.floor(window.innerWidth / 270);
-    clickCounter++;
-    if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
-      movieLists[i].style.transform = `translateX(${
-        movieLists[i].computedStyleMap().get("transform")[0].x.value - 300
-      }px)`;
-    } else {
-      movieLists[i].style.transform = "translateX(0)";
-      clickCounter = 0;
-    }
-  });
-
-  // console.log(Math.floor(window.innerWidth / 270));
-});
