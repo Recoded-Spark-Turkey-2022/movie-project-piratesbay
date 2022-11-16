@@ -112,8 +112,8 @@ const actorMovieCredits = async () => {
   const url = constructUrl(`person/${person_id}/movie_credits`)
   const res = await fetch(url)
   const data = await res.json()
-  // console.log(data.results);
-  return data.results;
+  // console.log(data);
+  return data;
 };
 
 
