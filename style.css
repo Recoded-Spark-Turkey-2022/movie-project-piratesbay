@@ -9,9 +9,8 @@
 }
 
 body {
-    width: 100%;
-    min-height: 100vh;
     background-color: rgb(0, 0, 0);
+    
 }
 
 
@@ -20,14 +19,15 @@ body {
 }
 
 .container {
-    padding-top: 32px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    padding-top: 200px;
+    padding-bottom: 600px;
+    padding-left: 32px;
+    width: 100%;
+    overflow: hidden;
+    
 }
 
-#actors {
+.actors {
     margin: 24px 16px 0 0;
 }
 
@@ -39,14 +39,15 @@ body {
     background-image: url("https://occ.a.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABSpwEug4tuhVfawRFuDL8pHlyDgvXFolAz5G_YTKvMhzSqt4F0-3QFBt0zfBzMc8Af1RrWCEuz9r3C39Pud__t51SPP8PKyRNUnx.jpg?r=cec");
     background-size: cover;
     background-position: center;
-    position: relative;
+    position: absolute;
     margin-top: 0px;
     margin-left: 30px;
     z-index: -1;
+    
 }
 
 .topImage > p {
-    font-size: 3rem;
+    font-size: 40px;
     position: absolute; left: 0; top: 0; width: 100%; height: 500px;
     padding: 2em;
     background-image: linear-gradient(to top,
@@ -54,6 +55,7 @@ body {
     rgba(0,0,0,.7) 20%,
     rgba(0,0,0,.4) 40%,
     rgba(0,0,0,0) 80%);
+    z-index: -1;
 }
 
 nav {
@@ -72,6 +74,7 @@ nav {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(0, 0, 0, 0.3);
+    
 
 }
 
@@ -108,15 +111,13 @@ input {
 }
 
 .dropdown-content {
-    cursor: pointer;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    transition: all 0.3 ease;
+    /* z-index: 1; */
 }
 
 .dropdown-content a {
@@ -127,7 +128,7 @@ input {
 }
 
 .dropdown a:hover {
-    background-color: #2980B9;
+    background-color: #ddd;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -138,6 +139,40 @@ input {
     display: block;
 }
 
+.topMovie {
+    color: #ddd;
+    font-family: 'Orbitron', sans-serif; 
+}
+
+.strangerOverview {
+    color: #ddd;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 70px;
+    top: 30%;
+    width: 40%;
+    
+}
+
+.trailer {
+    background-color: red;
+    font-size: 12px;
+    color: azure;
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.trailerContainer {
+    position: absolute;
+    top: 350px;
+    left: 230px;
+    width: 50%;
+    margin-left: 10px;
+}
+
 nav img {
     height: 70px;
     width: auto;
@@ -145,7 +180,106 @@ nav img {
 }
 
 h4 {
+    
     font-family: 'Pirata One', cursive;
     text-align: center;
-    margin-top: 5px;
+}
+
+.movie-list-title {
+    font-size: 22px;
+    color: #ddd;
+    padding-left: 30px;
+    margin-top: 430px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    height: 300px;
+    width: 100%;
+    transform: translateX(0);
+    transition: all 1s ease-in-out;
+    margin-bottom: 100px;
+    
+}
+
+.movieDiv {
+    margin-right: 30px;
+  position: relative;
+}
+
+.movieDiv:hover .movieImage {
+    transform: scale(1.2);
+    margin: 0 30px;
+    cursor: pointer;
+    
+    
+}
+
+.movieImage {
+    border-radius: 50px;
+    width: 250px;
+    height: 250px;
+    transition: 1s all ease-in-out;
+}
+
+h3 {
+    color: #ddd;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.arrow {
+    font-size: 120px;
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    color: lightgray;
+    opacity: 0.5;
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.526);
+}
+
+.arrowContainer {
+    z-index: 9;
+}
+
+.movies {
+    margin-top: 0px;
+    margin-left: 94px;
+    
+}
+
+.cast {
+    font-size: 100px;
+    color: white;
+}
+
+
+.actors {
+    display: flex;
+    align-items: center;
+    position: absolute;
+   
+}
+
+.castContainer {
+    display: flex;
+    align-items: center;
+    /* position: absolute; */
+}
+
+.eachActor {
+    display: flex;
+    align-items: center;
+    transform: translateX(0);
+    position: relative;
+    left: 50px;
+    top: 300px;
 }
