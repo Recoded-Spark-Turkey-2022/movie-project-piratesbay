@@ -257,7 +257,7 @@ const renderTrailer = (movieTrailer) => {
 //Actor Section--------------------------------------------------------------
 const actorrun= async () => {
   const actors= await fetchActors();
-  console.log(actors)
+  // console.log(actors)
   renderActors(actors)
 }
 
@@ -435,7 +435,7 @@ window.onclick = function(e) {
 }
 
 // Actors fetch and listening
-const actorLink = document.getElementById("actor-link")
+const actorLink = document.querySelector(".actor-link");
 actorLink.addEventListener("click", () => {
   fetch(`${TMDB_BASE_URL}/person/popular?api_key=${atob(
     "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
