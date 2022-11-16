@@ -280,6 +280,7 @@ h3 {
     position: relative;
     left: 50px;
     top: 300px;
+    cursor: pointer;
 
 }
 
@@ -301,6 +302,7 @@ h3 {
     position: relative;
     left: 50px;
     top: 600px;
+    cursor: pointer;
 }
 
 .relatedContainer {
@@ -325,4 +327,9 @@ h3 {
 .trailerContainer {
     display: flex;
     align-items: center;
+}
+
+.actorsTile {
+    font-size: 100px;
+    position: absolute;
 }

@@ -189,7 +189,7 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
             <p id="movie-vote_average">${movie.vote_average}</p>
         </div>
         </div>
-            <h3>Actors:</h3>
+            <h3 class="actorsTitle">Actors:</h3>
             <div class ="actors" >
             </div>
             
@@ -223,7 +223,7 @@ const renderCast = (movieCast) => {
     <p class="actorName">${actor.name}</p>
     `
     // eachActor.addEventListener("click", (e)=>{
-    //   movieDetails();
+    //   actorDetails(actor);
     // })
 
     castContainer.appendChild(eachActor);
@@ -241,9 +241,9 @@ const renderRelatedMovies = (relatedMovies) => {
     eachMovie.innerHTML= `<img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200" width="150">
     <p class="movieName">${movie.title}</p>
     `
-    // eachActor.addEventListener("click", (e)=>{
-    //   movieDetails();
-    // })
+    relatedContainer.addEventListener("click", (e)=>{
+      movieDetails(movie);
+    })
 
     relatedContainer.appendChild(eachMovie);
     related.appendChild(relatedContainer);
