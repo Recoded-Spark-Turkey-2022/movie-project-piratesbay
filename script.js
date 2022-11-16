@@ -25,9 +25,9 @@ const constructUrl = (path) => {
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
   const movieCast = await fetchCast(movie.id);
-  // const movieTrailer = await fetchVideos(movie.id);
-  // const relatedMovies = await fetchSimilarMovies(movie.id);
-  renderMovie(movieRes,movieCast);
+  const movieTrailer = await fetchVideos(movie.id);
+  const relatedMovies = await fetchSimilarMovies(movie.id);
+  renderMovie(movieRes,movieCast,relatedMovies,movieTrailer);
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
@@ -151,7 +151,7 @@ const renderMovies = (movies) => {
 
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie,movieCast) => {
+const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
   CONTAINER.innerHTML = `
     <div class="row">
         <div class="col-md-4">
@@ -171,23 +171,23 @@ const renderMovie = (movie,movieCast) => {
             <p id="movie-vote_average">${movie.vote_average}</p>
         </div>
         </div>
-            <h3>Actors:</h3>
+            <h3 class="actorsTitle">Actors:</h3>
             <div class ="actors" >
             </div>
             
         
-        <div class="movieTrailer">
+        
             <h3>Trailer:</h3>
             <div class="trailerContainer"></div>
-        </div>
-        <div class="relatedMovies">
+       
+       
             <h3>Similar Movies:</h3>
             <div class="relatedMoviesContainer"></div>
-        </div>
+       
     </div>`;
     renderCast(movieCast);
-    // renderTrailer(movieTrailer);
-    // renderRelatedMovies(relatedMovies);
+    renderTrailer(movieTrailer);
+    renderRelatedMovies(relatedMovies);
 
 };
 
@@ -199,14 +199,49 @@ const renderCast = (movieCast) => {
     const eachActor = document.createElement("div");
     eachActor.setAttribute("class","eachActor");
     eachActor.innerHTML= `<img src="${BACKDROP_BASE_URL + actor.profile_path}" alt="${actor.name} poster" height="200">
-    <div class="actorInfo">
     <p class="actorName">${actor.name}</p>
-    </div>;`
-    // eachActor.addEventListener("click", (e)=>{
-    //   movieDetails();
-    // })
+    `
+    eachActor.addEventListener("click", (e)=>{
+      actorDetails(actor);
+    })
+
     castContainer.appendChild(eachActor);
     actors.appendChild(castContainer);
+  });
+}
+
+const renderRelatedMovies = (relatedMovies) => {
+  const related = document.querySelector(".relatedMoviesContainer");
+  relatedMovies.slice(0,5).map ((movie)=> {
+    const relatedContainer = document.createElement("div");
+    relatedContainer.setAttribute("class","relatedContainer");
+    const eachMovie = document.createElement("div");
+    eachMovie.setAttribute("class","eachMovie");
+    eachMovie.innerHTML= `<img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200" width="150">
+    <p class="movieName">${movie.title}</p>
+    `
+    relatedContainer.addEventListener("click", (e)=>{
+      movieDetails(movie);
+    })
+
+    relatedContainer.appendChild(eachMovie);
+    related.appendChild(relatedContainer);
+  });
+}
+
+
+const renderTrailer = (movieTrailer) => {
+  const trailer = document.querySelector(".trailerContainer");
+  movieTrailer.slice(1,2).map ((video)=> {
+    const trailerContainer = document.createElement("div");
+    trailerContainer.setAttribute("class","trailerContainer");
+    const eachTrailer = document.createElement("div");
+    eachTrailer.setAttribute("class","eachTrailer");
+    eachTrailer.innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer.trailer}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `
+
+    trailerContainer.appendChild(eachTrailer);
+    trailer.appendChild(trailerContainer);
   });
 }
 
