@@ -1,4 +1,3 @@
-
 'use strict';
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
@@ -172,18 +171,6 @@ const renderMovies = (movies) => {
   });
 };
 
-const renderActor = (actor) => {
-  actorContainer.innerHTML= `
-  <div class="personContainer">
-    <div class="personContainer2">
-      <img class="actorImage" src=${actor.backdropUrl}>
-    </div>
-      <div class="movieDetails">
-        <h2 class="movieName">${actor.name}</h2>
-      </div>
-  </div>
-  `
-}
 
 
 // You'll need to play with this function in order to add features and enhance the style.
@@ -216,13 +203,10 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
             <h3>Trailer:</h3>
             <div class="trailerContainer"></div>
        
-
        
             <h3>Similar Movies:</h3>
             <div class="relatedMoviesContainer"></div>
        
-
-
     </div>`;
     renderCast(movieCast);
     renderTrailer(movieTrailer);
@@ -271,19 +255,18 @@ const renderRelatedMovies = (relatedMovies) => {
 
 const renderTrailer = (movieTrailer) => {
   const trailer = document.querySelector(".trailerContainer");
-  movieTrailer.slice(1,2).map ((video)=> {
+  movieTrailer.slice(0,1).map ((video)=> {
     const trailerContainer = document.createElement("div");
     trailerContainer.setAttribute("class","trailerContainer");
     const eachTrailer = document.createElement("div");
     eachTrailer.setAttribute("class","eachTrailer");
-    eachTrailer.innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer.trailer}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    eachTrailer.innerHTML= `<iframe width="426" height="240" id="trailer" type="text/html" src="https://www.youtube.com/embed/${video}?autoplay=1" ></iframe>
     `
 
     trailerContainer.appendChild(eachTrailer);
     trailer.appendChild(trailerContainer);
   });
 }
-
 
 
 document.addEventListener("DOMContentLoaded", autorun);
@@ -332,7 +315,4 @@ button.addEventListener('click', (e) => {
 const arrows = document.querySelectorAll(".arrow");
 const movieLists = document.querySelectorAll(".container");
 // console.log(movieLists);
-
-
-
 
