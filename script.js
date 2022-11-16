@@ -107,6 +107,16 @@ const fetchActor = async () => {
 fetchActor();
 
 
+//This function is to fetch single actor related movies
+const actorMovieCredits = async () => {
+  const url = constructUrl(`person/${person_id}/movie_credits`)
+  const res = await fetch(url)
+  const data = await res.json()
+  // console.log(data.results);
+  return data.results;
+};
+
+
 // This function is to fetch trailers.
 const fetchVideos = async () => {
   const url = constructUrl(`movie/${movie_id}/videos`);
