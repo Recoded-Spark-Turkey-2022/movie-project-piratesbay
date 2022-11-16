@@ -142,6 +142,7 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+  CONTAINER.innerHTML = ""
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.setAttribute("class","movieDiv");
