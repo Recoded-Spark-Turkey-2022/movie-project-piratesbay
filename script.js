@@ -4,6 +4,7 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
+const actorsContainer = document.querySelector(".actorsContainer");
 
 
 // Don't touch this function please
@@ -277,8 +278,8 @@ const actorMovieCredits = async (person_id) => {
 
 
 const renderActors = (actors) => {
-  CONTAINER.innerHTML = "";
-  const actorsContainer = document.createElement("div")
+  actorsContainer.innerHTML = "";
+  const actorsContainers = document.createElement("div")
 
   actors.map((actor) => {
     const actorDiv = document.createElement("div");
@@ -292,14 +293,14 @@ const renderActors = (actors) => {
       actorDetails(actor);
     });
     
-    actorsContainer.appendChild(actorDiv);
-    CONTAINER.appendChild(actorsContainer)
+    actorsContainers.appendChild(actorDiv);
+    actorsContainer.appendChild(actorsContainers);
   });
 };
 
 const renderActor = (actor) => {
-  CONTAINER.innerHTML = "";
-  CONTAINER.innerHTML = `
+  actorsContainer.innerHTML = "";
+  actorsContainer.innerHTML = `
     <div class="row">
         <div class="col-md-4">
              <img id="actor-backdrop" src=${
