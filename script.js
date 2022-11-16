@@ -5,6 +5,7 @@ const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
 
+
 // Don't touch this function please
 const autorun = async () => {
   const movies = await fetchMovies();
@@ -219,7 +220,8 @@ actors.addEventListener("click", actorrun)
 
 const actorDetails = async (actor) => {
   const actorRes = await fetchActor(actor.id);
-  console.log(actorRes)
+  // const actorMovieCredits = await actorMovieCredits(actor.id);
+  // console.log(actorRes)
   renderActor(actorRes);
 };
 
@@ -247,32 +249,31 @@ const actorMovieCredits = async (person_id) => {
   const url = constructUrl(`person/${person_id}/movie_credits`)
   const res = await fetch(url)
   const data = await res.json()
-  const dataRes = data['cast']
-  console.log(dataRes)
-  const knownFor = document.getElementById("knownFor")
-  for (let i = 0; i < 5; i++) {
-    let imagePath = "/no_image.jpg";
-    if (dataRes[i].backdrop_path !== null) {
-      imagePath = BACKDROP_BASE_URL + dataRes[i].backdrop_path;
-      const movieCard = document.createElement("div");
-      movieCard.innerHTML = `
-        <img src="${imagePath}" alt="${dataRes[i].title
-        } poster  ">
-        <div class=" text-center">
-        <h5>${dataRes[i].title}</h5>
-        <span> ratings: ${dataRes[i].vote_average}/10</span>
-  </div>`;
-      
-      knownFor.appendChild(movieCard)
-
-      movieCard.addEventListener("click", () => {
-        movieDetails(dataRes[i]);
-      });
-    }
-
-  }
-
+  return data.cast
 };
+
+
+//
+//This part is unfinished (and line 223 and 330). I tried what menar does but could not add Movie credits into actors page 
+//
+// const renderRelatedMovies = (movieCredits) => {
+//   const relatedMovies = document.querySelector(".relatedMovies");
+//   movieCredits.slice(0,5).map ((movie)=> {
+//     const movieContainer = document.createElement("div");
+//     movieContainer.setAttribute("class","movieContainer");
+//     const eachMovie = document.createElement("div");
+//     eachMovie.setAttribute("class","eachMovie");
+//     eachMovie.innerHTML= `<img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200">
+//     <div class="actorInfo">
+//     <p class="actorName">${movie.title}</p>
+//     </div>;`
+//     // eachActor.addEventListener("click", (e)=>{
+//     //   movieDetails();
+//     // })
+//     movieContainer.appendChild(eachMovie);
+//     relatedMovies.appendChild(movieContainer);
+//   });
+// }
 
 
 const renderActors = (actors) => {
@@ -319,14 +320,14 @@ const renderActor = (actor) => {
         </div>
         <div>
           <h4  id="moviesBy" style="padding:1rem;"> Related Movies:</h4> 
-          <div class="row justify-content-center" id="knownFor"></div>
+          <div class="relatedMovies"></div>
         </div>
     </div>`;
 
     if (actor.deathday === null) {
       document.getElementById("actor-deathday").remove()
     }
-    actorMovieCredits(actor.person_id)
+    // renderRelatedMovies(movieCredits)
 };
 
 //------------------------------------------------------------------------------------
