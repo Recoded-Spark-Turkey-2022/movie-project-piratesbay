@@ -37,6 +37,36 @@ const fetchMovies = async () => {
   return res.json();
 };
 
+//searchbox starts here 
+const searchConstructUrl = (searchInput) => {
+  return `${this.TMDB_BASE_URL}/search/multi?api_key=${atob('NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=')}&query=${searchInput}`;
+};
+
+const fetchSearch = async (searchInput) => {
+  const url = searchConstructUrl(searchInput);
+  const res = await fetch(url);
+  // console.log(url);
+  const data = await res.json();
+  // console.log(data);
+  return data.results;
+}
+// fetchSearch();
+
+const renderSearch = (word) =>{
+  const searchResult = fetchSearch(word);
+  CONTAINER.innerHTML="";
+  renderMovies(searchResult);
+}
+
+const searchBox = document.querySelector("#search-input");
+const searchBtn = document.querySelector(".searchBtn");
+searchBtn.addEventListener("click", (e)=>{
+  e.preventDefault();
+  let searchInput=searchBox.value;
+  renderSearch(searchInput);
+})
+
+
 
 // This function is to fetch genres.
 const fetchGenre = async () => {
@@ -464,6 +494,19 @@ document.onkeydown = (e) => {
 document.onkeyup = (e) => {
   isKeyPressed[e.key] = false;
 };
+
+
+//Searchbox starts here
+
+
+
+
+
+  
+  //-----------------------------------------
+
+  
+
 
 
 
