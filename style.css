@@ -196,10 +196,21 @@ h4 {
     background: #FFF;
 }
 
-/* .slide-content {
+.slide-content {
     margin: auto;
     width: 100%;
-} */
+}
+
+.slide-content::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 0.1rem;
+    left: 112px;
+    bottom: 0;
+    background: black;
+    margin: auto;
+}
 
 .image-content, 
 .card-content {
@@ -263,6 +274,7 @@ h4 {
 }
 
 .slide-container {
+    position: relative;
     max-width: 1120px;
     width: 100%;
     background-color: gray;
@@ -278,4 +290,17 @@ footer {
     display: flex;
     justify-content: center;
     gap: 50px;
+}
+
+#icons {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+    gap: 20px;
+}
+
+#copy-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
