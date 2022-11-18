@@ -80,7 +80,7 @@ const fetchPopularMovies = async () => {
   const data = await res.json();
   console.log(data.results);
   return data.results;
- 
+
 };
 //fetchPopularMovies();
 
@@ -292,22 +292,22 @@ const actorDetails = async (actor) => {
 };
 
 // This function is to fetch actors.
-const fetchActors = async () => {
+/* const fetchActors = async () => {
   const url = constructUrl(`person/popular`);
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results[0][3]);
   return data.results;
-};
+}; */
 // fetchActors()
 
 // This function is to fetch actor.
-const fetchActor = async (person_id) => {
+/* const fetchActor = async (person_id) => {
   const url = constructUrl(`person/${person_id}`);
   const res = await fetch(url);
   const data = await res.json();
   return data
-};
+}; */
 // fetchActor()
 
 //This function is to fetch single actor related movies(known_for)
@@ -460,13 +460,13 @@ window.onclick = function(e) {
 
 // Actors fetch and listening
 const actorLink = document.getElementById("actor-link")
-actorLink.addEventListener("click", () => {
+/* actorLink.addEventListener("click", () => {
   fetch(`${TMDB_BASE_URL}/person/popular?api_key=${atob(
     "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
   )}`)
   .then(resp => resp.json())
   .then(data => renderMovies(data.results))
-})
+}) */
 
 //Shortcut for moving the cursor to the search box
 const searchInput = document.getElementById("search-input");
@@ -493,6 +493,7 @@ searchInput.addEventListener("input", (e) => {
   fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
   .then(resp => resp.json())
   .then(data => { 
+    console.log(e.target.value)
     data.results.forEach(result => {
       if (result.media_type === "movie") {
         renderMovies(data.results)
@@ -504,10 +505,6 @@ searchInput.addEventListener("input", (e) => {
   }
 )
 })
-
-
-
-
 
 const button = document.querySelector('.trailer');
 button.addEventListener('click', (e) => {
