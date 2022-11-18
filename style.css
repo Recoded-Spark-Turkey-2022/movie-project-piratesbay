@@ -314,6 +314,8 @@ p {
     font-size: 18px;
     font-family: 'Orbitron', sans-serif;
     padding: 3px;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -325,6 +327,7 @@ p {
  
 .info {
     font-size: 10px;
+    width: 60%;
     color: rgb(185, 42, 42);
     font-family: 'Orbitron', sans-serif;;
 }
@@ -345,4 +348,16 @@ p {
     display: flex;
     margin-left: 250px;
     
+}
+
+.moviePage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.two {
+  position: absolute;
+  margin-left: 40%;
+  margin-top: 25%;
+  width: 90%;
 }

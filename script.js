@@ -164,6 +164,8 @@ const renderMovies = (movies) => {
 const renderMovie = (movie,movieCast,relatedMovies,trailer) => {
   CONTAINER.innerHTML = `
     <div class="home-row">
+    <section class="moviePage">
+    <div class="one">
         <div class="col-md-4">
            <img id="movie-backdrop" src=${
               BACKDROP_BASE_URL + movie.backdrop_path
@@ -183,10 +185,12 @@ const renderMovie = (movie,movieCast,relatedMovies,trailer) => {
             <p class="info">${movie.original_langauge}</p>
             
         </div>
-      
+        </div>
+        <div class="two">
            <h5>Trailer</h5>
            <div class="trailerVideo"><iframe class="trailerVideo" src="https://www.youtube.com/embed/${trailer.results[0].key}?autoplay=1"></iframe></div>
-
+           </div>
+           </section>
 
             <h5>Actors</h5>
             <div class ="actors" ></div>
