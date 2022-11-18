@@ -4,11 +4,14 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
+const actorsContainer = document.querySelector(".actorsContainer");
+
 
 // Don't touch this function please
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
+  // console.log(movies);
 };
 
 // Don't touch this function please
@@ -21,7 +24,10 @@ const constructUrl = (path) => {
 // You may need to add to this function, definitely don't delete it.
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
-  renderMovie(movieRes);
+  const movieCast = await fetchCast(movie.id);
+  const movieTrailer = await fetchVideos(movie.id);
+  const relatedMovies = await fetchSimilarMovies(movie.id);
+  renderMovie(movieRes,movieCast,relatedMovies,movieTrailer);
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
@@ -74,6 +80,7 @@ const fetchPopularMovies = async () => {
   const data = await res.json();
   console.log(data.results);
   return data.results;
+ 
 };
 //fetchPopularMovies();
 
@@ -85,7 +92,7 @@ const fetchTopRated = async () => {
   console.log(data.results);
   return data.results;
 };
-//fetchTopRated();
+// fetchTopRated();
 
 
 // This function is to fetch upcoming movies.
@@ -100,7 +107,7 @@ const fetchUpComing = async () => {
 
 
 // This function is to fetch movie cast.
-const fetchCast = async () => {
+const fetchCast = async (movie_id) => {
   const url = constructUrl(`movie/${movie_id}/credits`);
   const res = await fetch(url);
   const data = await res.json();
@@ -119,28 +126,30 @@ const fetchActor = async () => {
   return data;
 };
 //fetchActor();
+// fetchCast();
 
 
 // This function is to fetch trailers.
-const fetchVideos = async () => {
+const fetchVideos = async (movie_id) => {
   const url = constructUrl(`movie/${movie_id}/videos`);
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results);
   return data.results;
 };
-//fetchVideos();
+// fetchVideos();
 
 
 // This function is to fetch similar movies.
-const fetchSimilarMovies = async () => {
+const fetchSimilarMovies = async (movie_id) => {
   const url = constructUrl(`movie/${movie_id}/similar`);
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results);
   return data.results;
 };
-//fetchSimilarMovies();
+// fetchSimilarMovies();
+
 
 // Don't touch this function please. This function is to fetch one movie.
 const fetchMovie = async (movieId) => {
@@ -156,8 +165,9 @@ const renderMovies = (movies) => {
   CONTAINER.innerHTML = ""
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
+    movieDiv.setAttribute("class","movieDiv");
     movieDiv.innerHTML = `
-        <img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
+        <img class="movieImage" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
       movie.title
     } poster">
         <h3>${movie.title}</h3>`;
@@ -168,8 +178,10 @@ const renderMovies = (movies) => {
   });
 };
 
+
+
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie) => {
+const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
   CONTAINER.innerHTML = `
     <div class="row">
         <div class="col-md-4">
@@ -189,10 +201,201 @@ const renderMovie = (movie) => {
             <p id="movie-vote_average">${movie.vote_average}</p>
         </div>
         </div>
-            <h3>Actors:</h3>
-            <ul id="actors" class="list-unstyled"></ul>
+            <h3 class="actorsTitle">Actors:</h3>
+            <div class ="actors" >
+            </div>
+            
+        
+        
+            <h3>Trailer:</h3>
+            <div class="trailerContainer"></div>
+       
+       
+            <h3>Similar Movies:</h3>
+            <div class="relatedMoviesContainer"></div>
+       
     </div>`;
+    renderCast(movieCast);
+    renderTrailer(movieTrailer);
+    renderRelatedMovies(relatedMovies);
+
 };
+
+const renderCast = (movieCast) => {
+  const actors = document.querySelector(".actors");
+  movieCast.slice(0,5).map ((actor)=> {
+    const castContainer = document.createElement("div");
+    castContainer.setAttribute("class","castContainer");
+    const eachActor = document.createElement("div");
+    eachActor.setAttribute("class","eachActor");
+    eachActor.innerHTML= `<img src="${BACKDROP_BASE_URL + actor.profile_path}" alt="${actor.name} poster" height="200">
+    <p class="actorName">${actor.name}</p>
+    `
+    eachActor.addEventListener("click", (e)=>{
+      actorDetails(actor);
+    })
+
+    castContainer.appendChild(eachActor);
+    actors.appendChild(castContainer);
+  });
+}
+
+const renderRelatedMovies = (relatedMovies) => {
+  const related = document.querySelector(".relatedMoviesContainer");
+  relatedMovies.slice(0,5).map ((movie)=> {
+    const relatedContainer = document.createElement("div");
+    relatedContainer.setAttribute("class","relatedContainer");
+    const eachMovie = document.createElement("div");
+    eachMovie.setAttribute("class","eachMovie");
+    eachMovie.innerHTML= `<img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200" width="150">
+    <p class="movieName">${movie.title}</p>
+    `
+    relatedContainer.addEventListener("click", (e)=>{
+      movieDetails(movie);
+    })
+
+    relatedContainer.appendChild(eachMovie);
+    related.appendChild(relatedContainer);
+  });
+}
+
+
+const renderTrailer = (movieTrailer) => {
+  const trailer = document.querySelector(".trailerContainer");
+  movieTrailer.slice(1,2).map ((video)=> {
+    const trailerContainer = document.createElement("div");
+    trailerContainer.setAttribute("class","trailerContainer");
+    const eachTrailer = document.createElement("div");
+    eachTrailer.setAttribute("class","eachTrailer");
+    eachTrailer.innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer.trailer}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `
+
+    trailerContainer.appendChild(eachTrailer);
+    trailer.appendChild(trailerContainer);
+  });
+}
+
+//Actor Section--------------------------------------------------------------
+const actorrun= async () => {
+  const actors= await fetchActors();
+  // console.log(actors)
+  renderActors(actors)
+}
+
+actors.addEventListener("click", actorrun)
+
+const actorDetails = async (actor) => {
+  const actorRes = await fetchActor(actor.id);
+  // const actorMovieCredits = await actorMovieCredits(actor.id);
+  // console.log(actorRes)
+  renderActor(actorRes);
+};
+
+// This function is to fetch actors.
+const fetchActors = async () => {
+  const url = constructUrl(`person/popular`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log(data.results[0][3]);
+  return data.results;
+};
+// fetchActors()
+
+// This function is to fetch actor.
+const fetchActor = async (person_id) => {
+  const url = constructUrl(`person/${person_id}`);
+  const res = await fetch(url);
+  const data = await res.json();
+  return data
+};
+// fetchActor()
+
+//This function is to fetch single actor related movies(known_for)
+const actorMovieCredits = async (person_id) => {
+  const url = constructUrl(`person/${person_id}/movie_credits`)
+  const res = await fetch(url)
+  const data = await res.json()
+  return data.cast
+};
+
+
+//
+//This part is unfinished (and line 223 and 330). I tried what menar does but could not add Movie credits into actors page 
+//
+// const renderRelatedMovies = (movieCredits) => {
+//   const relatedMovies = document.querySelector(".relatedMovies");
+//   movieCredits.slice(0,5).map ((movie)=> {
+//     const movieContainer = document.createElement("div");
+//     movieContainer.setAttribute("class","movieContainer");
+//     const eachMovie = document.createElement("div");
+//     eachMovie.setAttribute("class","eachMovie");
+//     eachMovie.innerHTML= `<img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200">
+//     <div class="actorInfo">
+//     <p class="actorName">${movie.title}</p>
+//     </div>;`
+//     // eachActor.addEventListener("click", (e)=>{
+//     //   movieDetails();
+//     // })
+//     movieContainer.appendChild(eachMovie);
+//     relatedMovies.appendChild(movieContainer);
+//   });
+// }
+
+
+const renderActors = (actors) => {
+  actorsContainer.innerHTML = "";
+  const actorsContainers = document.createElement("div")
+
+  actors.map((actor) => {
+    const actorDiv = document.createElement("div");
+    actorDiv.innerHTML = `
+        <img src="${PROFILE_BASE_URL + actor.profile_path}" alt="${
+      actor.name
+    } poster">
+        <h3>${actor.name}</h3>`;
+
+    actorDiv.addEventListener("click", () => {
+      actorDetails(actor);
+    });
+    
+    actorsContainers.appendChild(actorDiv);
+    actorsContainer.appendChild(actorsContainers);
+  });
+};
+
+const renderActor = (actor) => {
+  actorsContainer.innerHTML = "";
+  actorsContainer.innerHTML = `
+    <div class="row">
+        <div class="col-md-4">
+             <img id="actor-backdrop" src=${
+               PROFILE_BASE_URL + actor.profile_path
+             }>
+        </div>
+        <div class="col-md-8">
+            <h2 id="actor-name">${actor.name}</h2>
+            <p id="actor-gender"><b>Gender:</b> ${
+              actor.gender == 1 ? "famale" : "male"
+            }</p>
+            <p id="actor-popularity"><b>Popularity:</b> ${actor.popularity}</p>
+            <p id="actor-birthday"><b>Birthday:</b> ${actor.birthday}</p>
+            <p id="actor-deathday"><b>Deathday:</b> ${actor.deathday}</p>
+            <h4 id="actor-bio">${actor.biography}</h4>
+        </div>
+        <div>
+          <h4  id="moviesBy" style="padding:1rem;"> Related Movies:</h4> 
+          <div class="relatedMovies"></div>
+        </div>
+    </div>`;
+
+    if (actor.deathday === null) {
+      document.getElementById("actor-deathday").remove()
+    }
+    // renderRelatedMovies(movieCredits)
+};
+
+//------------------------------------------------------------------------------------
+
 
 document.addEventListener("DOMContentLoaded", autorun);
 
@@ -303,3 +506,16 @@ searchInput.addEventListener("input", (e) => {
 })
 
 
+
+
+
+const button = document.querySelector('.trailer');
+button.addEventListener('click', (e) => {
+  window.open('https://www.youtube.com/watch?v=umIeYcQLABg', '_blank');
+});
+
+
+const home = document.querySelector('.home')
+home.addEventListener('click', () => {
+  window.location.reload()
+})
