@@ -38,21 +38,30 @@ const fetchMovies = async () => {
 };
 
 
-// This function is to fetch genres.
+// Fetch genres
 const fetchGenre = async () => {
   const dropDownContent = document.querySelector(".dropdown-content")
   const url = constructUrl("genre/movie/list");
   const res = await fetch(url);
   const data = await res.json();
-  //console.log(data.genres);
+  
   data.genres.forEach(element => {
     const genreLink = document.createElement("a");
     genreLink.textContent = element.name
     genreLink.classList.add("genre")
     dropDownContent.appendChild(genreLink);
+
+    //Fetching the required genre of movies when its name clicked 
+    genreLink.addEventListener("click", () => {
+      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}&with_genres=${element.id}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    })
   });
 };
-// fetchGenre();
+fetchGenre();
 
 
 // This fetch is to fetch popular movies.
@@ -60,19 +69,18 @@ const fetchPopularMovies = async () => {
   const url = constructUrl(`movie/popular`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
+  console.log(data.results);
   return data.results;
- 
-};
-// fetchPopularMovies();
 
+};
+//fetchPopularMovies();
 
 // This function is to fetch Top rated movies.
 const fetchTopRated = async () => {
   const url = constructUrl(`movie/top_rated`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
+  console.log(data.results);
   return data.results;
 };
 // fetchTopRated();
@@ -83,10 +91,10 @@ const fetchUpComing = async () => {
   const url = constructUrl(`movie/upcoming`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
+  //console.log(data.results);
   return data.results;
 };
-// fetchUpComing();
+//fetchUpComing();
 
 
 // This function is to fetch movie cast.
@@ -97,7 +105,8 @@ const fetchCast = async (movie_id) => {
   // console.log(data.cast);
   return data.cast;
 };
-// fetchCast();
+//fetchCast();
+
 
 
 // This function is to fetch trailers.
@@ -133,6 +142,7 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+  CONTAINER.innerHTML = ""
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.setAttribute("class","movieDiv");
@@ -179,11 +189,9 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
         
             <h3>Trailer:</h3>
             <div class="trailerContainer"></div>
-       
-       
+  
             <h3>Similar Movies:</h3>
             <div class="relatedMoviesContainer"></div>
-       
     </div>`;
     renderCast(movieCast);
     renderTrailer(movieTrailer);
@@ -374,19 +382,74 @@ const renderActor = (actor) => {
 
 document.addEventListener("DOMContentLoaded", autorun);
 
-const dropDownButton = document.querySelector(".dropbtn")
+
+
+
+// Filter dropdown
+const dropDownButtons = document.querySelectorAll(".dropbtn")
 const dropDownContent = document.querySelector(".dropdown-content")
-dropDownButton.addEventListener("click", () => {
-  dropDownContent.classList.toggle("show")
+const filterDropDown = document.querySelector(".filter-dropdown-content")
+
+filterDropDown.childNodes.forEach(link => {
+  link.addEventListener("click", () => {
+    if (link.textContent === "Up coming") {
+      fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Popular") {
+      fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Now playing") {
+      fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Top rated") {
+      fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}`)
+      .then(resp => resp.json())
+      .then(data => renderMovies(data.results))
+    }
+  })
+})
+
+// Dropdown clicks
+dropDownButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    if (e.target.textContent === "Genre ") {
+      dropDownContent.classList.toggle("show")
+    } else if (e.target.textContent === "Filter ") {
+      filterDropDown.classList.toggle("show")
+    }
+  })
 })
 
 window.onclick = function(e) {
   if (!e.target.matches('.dropbtn')) {
     if (dropDownContent.classList.contains('show')) {
       dropDownContent.classList.remove('show');
+    } else if (filterDropDown.classList.contains('show')) {
+      filterDropDown.classList.remove('show');
     }
   }
 }
+
+// Actors fetch and listening
+const actorLink = document.getElementById("actor-link")
+/* actorLink.addEventListener("click", () => {
+  fetch(`${TMDB_BASE_URL}/person/popular?api_key=${atob(
+    "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+  )}`)
+  .then(resp => resp.json())
+  .then(data => renderMovies(data.results))
+}) */
 
 //Shortcut for moving the cursor to the search box
 const searchInput = document.getElementById("search-input");
@@ -408,6 +471,22 @@ document.onkeyup = (e) => {
   isKeyPressed[e.key] = false;
 };
 
+// Handling search inputs
+searchInput.addEventListener("input", (e) => {
+  fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
+  .then(resp => resp.json())
+  .then(data => { 
+    console.log(e.target.value)
+    data.results.forEach(result => {
+      if (result.media_type === "movie") {
+        renderMovies(data.results)
+      } /* else if () {
+      } */
+
+    })  
+  }
+)
+})
 
 const button = document.querySelector('.trailer');
 button.addEventListener('click', (e) => {
@@ -415,25 +494,7 @@ button.addEventListener('click', (e) => {
 });
 
 
-const arrows = document.querySelectorAll(".arrow");
-const movieLists = document.querySelectorAll(".container");
-// console.log(movieLists);
-
-arrows.forEach((arrow, i) => {
-  const itemNumber = movieLists[i].querySelectorAll(".movieDiv").length;
-  let clickCounter = 0;
-  arrow.addEventListener("click", () => {
-    const ratio = Math.floor(window.innerWidth / 270);
-    clickCounter++;
-    if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
-      movieLists[i].style.transform = `translateX(${
-        movieLists[i].computedStyleMap().get("transform")[0].x.value - 300
-      }px)`;
-    } else {
-      movieLists[i].style.transform = "translateX(0)";
-      clickCounter = 0;
-    }
-  });
-
-  // console.log(Math.floor(window.innerWidth / 270));
-});
+const home = document.querySelector('.home')
+home.addEventListener('click', () => {
+  window.location.reload()
+})
