@@ -312,11 +312,13 @@ p {
 
 .titles {
     color: rgba(186, 30, 30, 0.687);
-    font-size: 18px;
+    font-size: 15px;
     font-family: 'Orbitron', sans-serif;
     display: flex;
     justify-content: center;
-    margin: 0px;
+    width: 60px;
+    margin-left: 50px;
+    
 }
 
 
@@ -423,7 +425,7 @@ p {
 }
 
 .actorsImages:hover {
-        transform: scale(1.2);
+        transform: scale(1);
         margin: 0 10px;
         cursor: pointer;
 }
@@ -431,5 +433,5 @@ p {
 .actorsCards {
    display: flex;
    justify-content: center;
-   margin-top: 30px;
+   margin-top: 5px;
 }
