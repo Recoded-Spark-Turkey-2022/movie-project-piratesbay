@@ -224,6 +224,7 @@ h4 {
     margin-right: 30px;
   /* position: relative; */
   z-index: -1 !important;
+  cursor: pointer;
     
 }
 
@@ -240,18 +241,11 @@ h4 {
     transition: 1s all ease-in-out;
     position: relative;
     z-index: -1 !important;
+   
     
 }
 
-h3 {
-    color: #ddd;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    display: none;
-    
-}
+
 
 .arrow {
     font-size: 100px;
@@ -291,6 +285,45 @@ h3 {
 }
 
 h5 {
-    font-size: 30px;
+    font-size: 22px;
     padding: 30px;
+    font-family: 'Orbitron', sans-serif;
+    color: rgba(239, 239, 232, 0.793);
+}
+
+#movie-title {
+    font-size: 40px;
+    color: bisque;
+    font-family: 'Rubik Glitch', cursive;
+}
+
+h3 {
+    color: #ddd;
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+p {
+    font-size: 20px;
+    }
+
+
+.titles {
+    color: #ddd;
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif;
+    padding: 10px;
+}
+
+
+#movie-release-date {
+    font-size: 10px;
+    color: azure;
+    font-family: 'Orbitron', sans-serif;;
+}
+ 
+.info {
+    font-size: 10px;
+    color: rgb(185, 42, 42);
+    font-family: 'Orbitron', sans-serif;;
 }

@@ -150,7 +150,7 @@ const renderMovies = (movies) => {
         <img class="movieImage" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${
       movie.title
     } poster">
-        <h3>${movie.title}</h3>`;
+        `;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
     });
@@ -165,30 +165,30 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
   CONTAINER.innerHTML = `
     <div class="home-row">
         <div class="col-md-4">
-            <img id="movie-backdrop" src=${
+           <img id="movie-backdrop" src=${
               BACKDROP_BASE_URL + movie.backdrop_path
             }>
         </div>
         <div class="col-md-8">
-            <h2 id="movie-title">${movie.title}</h2>
-            <p id="movie-release-date"><b>Release Date:</b> ${
+            <p id="movie-title">${movie.title}</p>
+            <h3>Release Date:</h3> <p class="info">${
               movie.release_date
             }</p>
-            <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+            <p><h3>Runtime:</h3><p class="info"> ${movie.runtime} Minutes</p></p>
             <h3>Overview:</h3>
-            <p id="movie-overview">${movie.overview}</p>
+            <p class="info">${movie.overview}</p>
             <h3>vote_average:</h3>
-            <p id="movie-vote_average">${movie.vote_average}</p>
+            <p class="info">${movie.vote_average}</p>
         </div>
       
-           <h5>Trailer:</h5>
+           <h5>Trailer</h5>
             <div class="trailerVideo"></div>
 
 
-            <h5 class="actorsTitle">Actors:</h5>
+            <h5>Actors</h5>
             <div class ="actors" ></div>
        
-            <h5>Similar Movies:</h5>
+            <h5>Similar Movies</h5>
             <div class="relatedMoviesContainer"></div>
 
            
@@ -209,7 +209,7 @@ const renderCast = (movieCast) => {
     const eachActor = document.createElement("div");
     eachActor.setAttribute("class","eachActor");
     eachActor.innerHTML= `<img class="someImages" src="${BACKDROP_BASE_URL + actor.profile_path}" alt="${actor.name} poster" height="200">
-    <p class="actorName">${actor.name}</p>
+    <p class="titles">${actor.name}</p>
     `
     eachActor.addEventListener("click", (e)=>{
       actorDetails(actor);
@@ -225,7 +225,7 @@ const renderRelatedMovies = (relatedMovies) => {
     const eachMovie = document.createElement("div");
     eachMovie.setAttribute("class","eachMovie");
     eachMovie.innerHTML= `<img class="someImages" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200" width="150">
-    <p class="movieName">${movie.title}</p>
+    <p class="titles">${movie.title}</p>
     `
     related.addEventListener("click", (e)=>{
       movieDetails(movie);
