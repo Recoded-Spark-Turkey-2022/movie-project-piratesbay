@@ -11,7 +11,7 @@ const actorsContainer = document.querySelector(".actorsContainer");
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
-  // console.log(movies);
+  console.log(movies);
 };
 
 // Don't touch this function please
@@ -27,7 +27,8 @@ const movieDetails = async (movie) => {
   const movieCast = await fetchCast(movie.id);
   const relatedMovies = await fetchSimilarMovies(movie.id);
   const movieTrailer = await fetchVideos(movie.id);
-  renderMovie(movieRes,movieCast,relatedMovies,movieTrailer);
+  const director= await fetchDirector(movie.id);
+  renderMovie(movieRes,movieCast,relatedMovies,movieTrailer,director);
 };
 
 // This function is to fetch movies. You may need to add it or change some part in it in order to apply some of the features.
@@ -108,6 +109,14 @@ const fetchCast = async (movie_id) => {
 };
 // fetchCast();
 
+const fetchDirector = async (movie_id) => {
+  const url = constructUrl(`movie/${movie_id}/credits`);
+  const res = await fetch(url);
+  const data = await res.json();
+  // console.log (data.crew.find(cast => cast.job=="Director"));
+  return data.crew.find( cast => cast.job==="Director");
+}
+// fetchDirector();
 
 // This function is to fetch trailers.
 const fetchVideos = async (movie_id) => {
@@ -161,7 +170,7 @@ const renderMovies = (movies) => {
 
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie,movieCast,relatedMovies,trailer) => {
+const renderMovie = (movie,movieCast,relatedMovies,trailer,director) => {
   CONTAINER.innerHTML = `
     <div class="home-row">
     <section class="moviePage">
@@ -183,6 +192,8 @@ const renderMovie = (movie,movieCast,relatedMovies,trailer) => {
             <p class="info">${movie.vote_average}</p>
             <h3>Language:</h3>
             <p class="info">${movie.original_langauge}</p>
+            <h3>Director:</h3>
+            <p class="info">${director.name}</p>
             
         </div>
         </div>

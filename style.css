@@ -302,6 +302,7 @@ h3 {
     color: #ddd;
     font-size: 18px;
     font-family: 'Orbitron', sans-serif;
+    margin: 0px;
 }
 
 p {
@@ -313,9 +314,9 @@ p {
     color: rgba(186, 30, 30, 0.687);
     font-size: 18px;
     font-family: 'Orbitron', sans-serif;
-    padding: 3px;
     display: flex;
     justify-content: center;
+    margin: 0px;
 }
 
 
