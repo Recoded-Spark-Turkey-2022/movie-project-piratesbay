@@ -257,12 +257,13 @@ const actorMovieCredits = async (person_id) => {
 
 const renderActors = (actors) => {
   CONTAINER.innerHTML = "";
-  const actorsContainer = document.createElement("div")
+  const actorsContainer = document.createElement("div");
+  actorsContainer.setAttribute("class","actorsPage");
   actors.map((actor) => {
     const actorDiv = document.createElement("div");
     actorDiv.innerHTML = `
-      <img src="${PROFILE_BASE_URL + actor.profile_path}" alt="${
-      actor.name} poster"><h3>${actor.name}</h3>`;
+      <img class="actorsImages" src="${PROFILE_BASE_URL + actor.profile_path}" alt="${
+      actor.name} poster"><div class="actorsCards"><p class="info" id="actorsNames">${actor.name}</p></div>`;
 
     actorDiv.addEventListener("click", () => {
       actorDetails(actor);});
@@ -343,11 +344,7 @@ window.onclick = function(e) {
 
 // Actors fetch and listening
 const actorLink = document.querySelector(".actor-link");
-actorLink.addEventListener("click", () => {
-  fetch(`${TMDB_BASE_URL}/person/popular?api_key=${atob(
-  "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=" )}`)
-  .then(resp => resp.json())
-  .then(data => renderMovies(data.results))})
+
 
 //Shortcut for moving the cursor to the search box
 const searchInput = document.getElementById("search-input");

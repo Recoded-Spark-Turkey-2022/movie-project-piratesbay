@@ -398,3 +398,38 @@ p {
 #titles1 {
     margin-left: 72px;
 }
+
+.actorsPage {
+    display: flex;
+    margin-top: 1rem;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+}
+
+.actorsImages {
+    border-radius: 70px;
+    margin: 10px;
+    cursor: pointer;
+    border: solid rgb(55, 21, 21);
+   
+}
+
+#actorsNames {
+    font-size: 20px;
+   
+}
+
+.actorsImages:hover {
+        transform: scale(1.2);
+        margin: 0 10px;
+        cursor: pointer;
+}
+
+.actorsCards {
+   display: flex;
+   justify-content: center;
+   margin-top: 30px;
+}
