@@ -244,13 +244,12 @@ const actorMovieCredits = async (person_id) => {
       imagePath = BACKDROP_BASE_URL + dataRes[i].backdrop_path;
       const movieCard = document.createElement("div");
       movieCard.innerHTML = `
-        <img src="${imagePath}" alt="${dataRes[i].title
-        } poster  ">
-        <div class=" text-center">
-        <h5>${dataRes[i].title}</h5>
-        <span> <h3>ratings:</h3> ${dataRes[i].vote_average}/10</span> </div>`;
+      <div class="dontKnow">
+        <img class="actorRelatedMovies" src="${imagePath}" alt="${dataRes[i].title
+        } poster  "></div>
+        <p class="titles" id="titles1">${dataRes[i].title}</p>`;
       
-      knownFor.appendChild(movieCard)
+      knownFor.appendChild(movieCard);
 
       movieCard.addEventListener("click", () => {
         movieDetails(dataRes[i]);});}}};
@@ -259,9 +258,7 @@ const actorMovieCredits = async (person_id) => {
 const renderActors = (actors) => {
   CONTAINER.innerHTML = "";
   const actorsContainer = document.createElement("div")
-
   actors.map((actor) => {
-    // console.log(actor)
     const actorDiv = document.createElement("div");
     actorDiv.innerHTML = `
       <img src="${PROFILE_BASE_URL + actor.profile_path}" alt="${

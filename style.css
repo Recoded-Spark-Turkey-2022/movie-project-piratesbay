@@ -382,6 +382,19 @@ p {
     border: solid rgb(55, 21, 21);
 }
 
-#knownFor {
-    
+
+.actorRelatedMovies {
+    border-radius: 70px;
+    display: flex;
+    justify-content: space-between;
+    height: 170px;
+    width: 120px;
+    margin-left: 90px;
+    margin-top: 50px;
+    cursor: pointer;
+    border: solid rgb(55, 21, 21);
+}   
+
+#titles1 {
+    margin-left: 70px;
 }
