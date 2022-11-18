@@ -115,7 +115,7 @@ const fetchVideos = async (movie_id) => {
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results);
-  return data.results;
+  return data;
 };
 // fetchVideos();
 
@@ -161,7 +161,7 @@ const renderMovies = (movies) => {
 
 
 // You'll need to play with this function in order to add features and enhance the style.
-const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
+const renderMovie = (movie,movieCast,relatedMovies,trailer) => {
   CONTAINER.innerHTML = `
     <div class="home-row">
         <div class="col-md-4">
@@ -179,10 +179,13 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
             <p class="info">${movie.overview}</p>
             <h3>vote_average:</h3>
             <p class="info">${movie.vote_average}</p>
+            <h3>Language:</h3>
+            <p class="info">${movie.original_langauge}</p>
+            
         </div>
       
            <h5>Trailer</h5>
-            <div class="trailerVideo"></div>
+           <div class="trailerVideo"><iframe class="trailerVideo" src="https://www.youtube.com/embed/${trailer.results[0].key}?autoplay=1"></iframe></div>
 
 
             <h5>Actors</h5>
@@ -199,8 +202,6 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
     
     renderCast(movieCast);
     renderRelatedMovies(relatedMovies);
-    renderTrailer(movieTrailer);
-
 };
 
 const renderCast = (movieCast) => {
@@ -235,17 +236,6 @@ const renderRelatedMovies = (relatedMovies) => {
   });
 }
 
-
-const renderTrailer = (movieTrailer) => {
-  const trailerContainer = document.querySelector(".trailerVideo");
-  movieTrailer.slice(1,2).map ((video)=> {
-    const eachTrailer = document.createElement("div");
-    eachTrailer.setAttribute("class","eachTrailer");
-    eachTrailer.innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer.trailer}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `
-    trailerContainer.appendChild(eachTrailer);
-  });
-}
 
 //Actor Section--------------------------------------------------------------
 const actorrun= async () => {

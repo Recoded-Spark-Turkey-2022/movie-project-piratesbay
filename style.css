@@ -15,7 +15,9 @@ body {
 
 
 #movie-backdrop {
-    width: 100%;
+    width: 150%;
+   border-radius: 10px;
+   
 }
 
 
@@ -241,8 +243,6 @@ h4 {
     transition: 1s all ease-in-out;
     position: relative;
     z-index: -1 !important;
-   
-    
 }
 
 
@@ -254,13 +254,11 @@ h4 {
     right: 0px;
     color: lightgray;
     opacity: 0.5;
-    cursor: pointer;
-    
+    cursor: pointer; 
 }
 
 .arrowContainer {
-    z-index: -1;
-    
+    z-index: -1; 
 }
 
 .actors {
@@ -278,10 +276,13 @@ h4 {
 .trailerVideo {
     display: flex;
     justify-content: center;
+    height: 300px;
+    width: 70%;
 }
 
 .someImages {
     border-radius: 70px;
+    border: solid rgb(55, 21, 21); 
 }
 
 h5 {
@@ -309,10 +310,10 @@ p {
 
 
 .titles {
-    color: #ddd;
+    color: rgba(186, 30, 30, 0.687);
     font-size: 18px;
     font-family: 'Orbitron', sans-serif;
-    padding: 10px;
+    padding: 3px;
 }
 
 
@@ -326,4 +327,22 @@ p {
     font-size: 10px;
     color: rgb(185, 42, 42);
     font-family: 'Orbitron', sans-serif;;
+}
+
+.eachActor:hover{
+    transform: scale(1.2);
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.eachMovie:hover{
+    transform: scale(1.2);
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.col-md-4 {
+    display: flex;
+    margin-left: 250px;
+    
 }
