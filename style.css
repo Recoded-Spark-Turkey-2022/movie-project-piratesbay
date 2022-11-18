@@ -362,3 +362,26 @@ p {
   margin-top: 29%;
   width: 90%;
 }
+
+/* #actor-backdrop {
+    display: flex;
+    margin-left: 250px;
+} */
+
+.actorDiv {
+    margin: 30px;
+}
+
+#biography {
+    display: flex;
+    width: 100%;
+}
+
+#actor-backdrop {
+    border-radius: 70px;
+    border: solid rgb(55, 21, 21);
+}
+
+#knownFor {
+    
+}

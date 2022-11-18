@@ -205,16 +205,14 @@ const actorsBtn=document.getElementById("actors")
 const actorrun= async () => {
   const actors= await fetchActors();
   // console.log(actors)
-  renderActors(actors)
-}
+  renderActors(actors)}
 
 actorsBtn.addEventListener("click", actorrun)
 
 const actorDetails = async (actor) => {
   const actorRes = await fetchActor(actor.id);
   // console.log(actorRes)
-  renderActor(actorRes);
-};
+  renderActor(actorRes);};
 
 // This function is to fetch actors.
 const fetchActors = async () => {
@@ -222,8 +220,7 @@ const fetchActors = async () => {
   const res = await fetch(url);
   const data = await res.json();
   // console.log(data.results[0][3]);
-  return data.results;
-};
+  return data.results;};
 // fetchActors()
 
 // This function is to fetch actor.
@@ -231,8 +228,7 @@ const fetchActor = async (person_id) => {
   const url = constructUrl(`person/${person_id}`);
   const res = await fetch(url);
   const data = await res.json();
-  return data
-};
+  return data};
 // fetchActor()
 
 //This function is to fetch single actor related movies(known_for)
@@ -252,19 +248,12 @@ const actorMovieCredits = async (person_id) => {
         } poster  ">
         <div class=" text-center">
         <h5>${dataRes[i].title}</h5>
-        <span> ratings: ${dataRes[i].vote_average}/10</span>
-  </div>`;
+        <span> <h3>ratings:</h3> ${dataRes[i].vote_average}/10</span> </div>`;
       
       knownFor.appendChild(movieCard)
 
       movieCard.addEventListener("click", () => {
-        movieDetails(dataRes[i]);
-      });
-    }
-
-  }
-
-};
+        movieDetails(dataRes[i]);});}}};
 
 
 const renderActors = (actors) => {
@@ -275,50 +264,37 @@ const renderActors = (actors) => {
     // console.log(actor)
     const actorDiv = document.createElement("div");
     actorDiv.innerHTML = `
-        <img src="${PROFILE_BASE_URL + actor.profile_path}" alt="${
-      actor.name
-    } poster">
-        <h3>${actor.name}</h3>`;
+      <img src="${PROFILE_BASE_URL + actor.profile_path}" alt="${
+      actor.name} poster"><h3>${actor.name}</h3>`;
 
     actorDiv.addEventListener("click", () => {
-      actorDetails(actor);
-    });
+      actorDetails(actor);});
     
     actorsContainer.appendChild(actorDiv);
-    CONTAINER.appendChild(actorsContainer)
-  });
-};
+    CONTAINER.appendChild(actorsContainer)});};
 
 const renderActor = (actor) => {
   CONTAINER.innerHTML = "";
   CONTAINER.innerHTML = `
     <div class="row">
-        <div class="col-md-4">
-             <img id="actor-backdrop" src=${
-               PROFILE_BASE_URL + actor.profile_path
-             }>
-        </div>
-        <div class="col-md-8">
-            <h2 id="actor-name">${actor.name}</h2>
-            <p id="actor-gender"><b>Gender:</b> ${
-              actor.gender == 1 ? "famale" : "male"
-            }</p>
-            <p id="actor-popularity"><b>Popularity:</b> ${actor.popularity}</p>
-            <p id="actor-birthday"><b>Birthday:</b> ${actor.birthday}</p>
-            <p id="actor-deathday"><b>Deathday:</b> ${actor.deathday}</p>
-            <h4 id="actor-bio">${actor.biography}</h4>
-        </div>
-        <div>
-          <h4  id="moviesBy" style="padding:1rem;"> Related Movies:</h4> 
-          <div class="row justify-content-center" id="knownFor"></div>
-        </div>
-    </div>`;
+      <div class="actorDiv">
+      <img id="actor-backdrop" src=${
+      PROFILE_BASE_URL + actor.profile_path}>
+      </div>
+      <div class="col-md-8">
+      <h5 id="actor-name">${actor.name}</h5>
+      <p id="actor-gender"><h3>Gender:</h3><p class="info"> ${actor.gender == 1 ? "famale" : "male"}</p></p>
+      <p id="actor-popularity"><h3>Popularity:</h3> <p class="info">${actor.popularity}</p></p>
+      <p id="actor-birthday"><h3>Birthday:</h3> <p class="info">${actor.birthday}</p></p>
+      <p id="actor-deathday"><h3>Deathday:</h3> <p class="info">${actor.deathday}</p></p>
+      <h3>Biography</h3>
+      <p class="info" id="biography">${actor.biography}</p></div><div>
+      <h3> Related Movies:</h3> 
+      <div class="row justify-content-center" id="knownFor"></div></div></div>`;
 
     if (actor.deathday === null) {
-      document.getElementById("actor-deathday").remove()
-    }
-    actorMovieCredits(actor.id)
-};
+      document.getElementById("actor-deathday").remove() }
+      actorMovieCredits(actor.id)};
 
 //------------------------------------------------------------------------------------
 
