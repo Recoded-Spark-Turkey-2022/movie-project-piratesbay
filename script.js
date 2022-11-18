@@ -209,11 +209,11 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
         
             <h3>Trailer:</h3>
             <div class="trailerContainer"></div>
-       
-       
+  
+
             <h3>Similar Movies:</h3>
             <div class="relatedMoviesContainer"></div>
-       
+
     </div>`;
     renderCast(movieCast);
     renderTrailer(movieTrailer);
