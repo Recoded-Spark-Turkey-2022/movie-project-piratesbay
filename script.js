@@ -25,8 +25,8 @@ const constructUrl = (path) => {
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
   const movieCast = await fetchCast(movie.id);
-  const movieTrailer = await fetchVideos(movie.id);
   const relatedMovies = await fetchSimilarMovies(movie.id);
+  const movieTrailer = await fetchVideos(movie.id);
   renderMovie(movieRes,movieCast,relatedMovies,movieTrailer);
 };
 
@@ -157,13 +157,13 @@ const renderMovies = (movies) => {
     CONTAINER.appendChild(movieDiv);
   });
 };
-
+                              
 
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
   CONTAINER.innerHTML = `
-    <div class="row">
+    <div class="home-row">
         <div class="col-md-4">
             <img id="movie-backdrop" src=${
               BACKDROP_BASE_URL + movie.backdrop_path
@@ -180,78 +180,70 @@ const renderMovie = (movie,movieCast,relatedMovies,movieTrailer) => {
             <h3>vote_average:</h3>
             <p id="movie-vote_average">${movie.vote_average}</p>
         </div>
-        </div>
-            <h3 class="actorsTitle">Actors:</h3>
-            <div class ="actors" >
+      
+           <h5>Trailer:</h5>
+            <div class="trailerVideo"></div>
+
+
+            <h5 class="actorsTitle">Actors:</h5>
+            <div class ="actors" ></div>
+       
+            <h5>Similar Movies:</h5>
+            <div class="relatedMoviesContainer"></div>
+
+           
+            
             </div>
             
-        
-        
-            <h3>Trailer:</h3>
-            <div class="trailerContainer"></div>
-       
-       
-            <h3>Similar Movies:</h3>
-            <div class="relatedMoviesContainer"></div>
-       
     </div>`;
+    
     renderCast(movieCast);
-    renderTrailer(movieTrailer);
     renderRelatedMovies(relatedMovies);
+    renderTrailer(movieTrailer);
 
 };
 
 const renderCast = (movieCast) => {
   const actors = document.querySelector(".actors");
   movieCast.slice(0,5).map ((actor)=> {
-    const castContainer = document.createElement("div");
-    castContainer.setAttribute("class","castContainer");
     const eachActor = document.createElement("div");
     eachActor.setAttribute("class","eachActor");
-    eachActor.innerHTML= `<img src="${BACKDROP_BASE_URL + actor.profile_path}" alt="${actor.name} poster" height="200">
+    eachActor.innerHTML= `<img class="someImages" src="${BACKDROP_BASE_URL + actor.profile_path}" alt="${actor.name} poster" height="200">
     <p class="actorName">${actor.name}</p>
     `
     eachActor.addEventListener("click", (e)=>{
       actorDetails(actor);
     })
 
-    castContainer.appendChild(eachActor);
-    actors.appendChild(castContainer);
+    actors.appendChild(eachActor);
   });
 }
 
 const renderRelatedMovies = (relatedMovies) => {
   const related = document.querySelector(".relatedMoviesContainer");
   relatedMovies.slice(0,5).map ((movie)=> {
-    const relatedContainer = document.createElement("div");
-    relatedContainer.setAttribute("class","relatedContainer");
     const eachMovie = document.createElement("div");
     eachMovie.setAttribute("class","eachMovie");
-    eachMovie.innerHTML= `<img src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200" width="150">
+    eachMovie.innerHTML= `<img class="someImages" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title} poster" height="200" width="150">
     <p class="movieName">${movie.title}</p>
     `
-    relatedContainer.addEventListener("click", (e)=>{
+    related.addEventListener("click", (e)=>{
       movieDetails(movie);
     })
 
-    relatedContainer.appendChild(eachMovie);
-    related.appendChild(relatedContainer);
+    related.appendChild(eachMovie);
   });
 }
 
 
 const renderTrailer = (movieTrailer) => {
-  const trailer = document.querySelector(".trailerContainer");
+  const trailerContainer = document.querySelector(".trailerVideo");
   movieTrailer.slice(1,2).map ((video)=> {
-    const trailerContainer = document.createElement("div");
-    trailerContainer.setAttribute("class","trailerContainer");
     const eachTrailer = document.createElement("div");
     eachTrailer.setAttribute("class","eachTrailer");
     eachTrailer.innerHTML= `<iframe width="560" height="315" src="https://www.youtube.com/embed/${movieTrailer.trailer}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     `
-
     trailerContainer.appendChild(eachTrailer);
-    trailer.appendChild(trailerContainer);
   });
 }
 
@@ -325,7 +317,7 @@ const actorMovieCredits = async (person_id) => {
 const renderActors = (actors) => {
   actorsContainer.innerHTML = "";
   const actorsContainers = document.createElement("div")
-
+  actorsContainers.setAttribute("class","actorsContainers");
   actors.map((actor) => {
     const actorDiv = document.createElement("div");
     actorDiv.innerHTML = `
@@ -477,3 +469,5 @@ const home = document.querySelector('.home')
 home.addEventListener('click', () => {
   window.location.reload()
 })
+
+
