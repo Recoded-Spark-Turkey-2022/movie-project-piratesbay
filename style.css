@@ -435,3 +435,28 @@ p {
    justify-content: center;
    margin-top: 5px;
 }
+
+.genre {
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.navbar {
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.dropdown-content {
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.filter {
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.dropbtn {
+    font-family: 'Orbitron', sans-serif;;
+}
