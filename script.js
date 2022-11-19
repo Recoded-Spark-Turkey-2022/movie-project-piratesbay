@@ -11,7 +11,8 @@ const CONTAINER = document.querySelector(".container");
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
-  console.log(movies);};
+  // console.log(movies);
+};
 
 // Don't touch this function please
 const constructUrl = (path) => {
@@ -170,7 +171,8 @@ const renderMovie = (movie,movieCast,relatedMovies,trailer,director) => {
         </section>
         <h5>Actors</h5><div class ="actors" ></div>
         <h5>Similar Movies</h5><div class="relatedMoviesContainer"></div>
-        <h5>Production Companies</h5><div class="productionCompanies"></div>
+        <h5>Production Companies</h5>
+        <div class="productionCompanies">${movie.production_companies.map((company)=>`<img id="production" src="${BACKDROP_BASE_URL + company.logo_path}" alt="${company.name}"`)}</div>
         </div></div>`;
     
     renderCast(movieCast);
@@ -382,3 +384,4 @@ home.addEventListener('click', () => {
   window.location.reload()})
 
 
+ 
