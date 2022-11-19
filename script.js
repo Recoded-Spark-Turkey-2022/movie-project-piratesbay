@@ -4,7 +4,7 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
-// const actorsContainer = document.querySelector(".actorsContainer");
+const actorsContainer = document.querySelector(".actorsContainer");
 
 
 // Don't touch this function please
@@ -392,7 +392,7 @@ searchInput.addEventListener("input", (e) => {
             singleActor.setAttribute("class","actorsContainers");
             const actorDiv = document.createElement("div");
             actorDiv.innerHTML = `
-            <img src="${PROFILE_BASE_URL + result.profile_path}" alt="${result.name} poster">
+            <img  src="${PROFILE_BASE_URL + result.profile_path}" alt="${result.name} poster">
             <h3>${result.name}</h3>`;
     
             actorDiv.addEventListener("click", () => {
