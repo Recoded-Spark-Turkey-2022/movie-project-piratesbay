@@ -374,6 +374,38 @@ searchInput.addEventListener("input", (e) => {
     if (result.media_type === "movie") {
     renderMovies(data.results)}})})})
 
+    searchInput.addEventListener("input", (e) => {
+      fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
+      .then(resp => resp.json())
+      .then(data => { 
+        //console.log(data.results)
+        data.results.forEach(result => {
+          if (result.media_type === "movie") {
+            renderMovies(data.results)
+          }
+        })  
+        //actorsContainer.innerHTML = "";
+        data.results.forEach(result => {
+          if (result.media_type === "person") {
+            console.log(result.name)
+            const singleActor = document.createElement("div")
+            singleActor.setAttribute("class","actorsContainers");
+            const actorDiv = document.createElement("div");
+            actorDiv.innerHTML = `
+            <img src="${PROFILE_BASE_URL + result.profile_path}" alt="${result.name} poster">
+            <h3>${result.name}</h3>`;
+    
+            actorDiv.addEventListener("click", () => {
+                actorDetails(actor);
+            });
+        
+           singleActor.appendChild(actorDiv);
+           actorsContainer.appendChild(singleActor);
+          }
+        })
+      })
+    })
+
 const button = document.querySelector('.trailer');
 button.addEventListener('click', (e) => {
   window.open('https://www.youtube.com/watch?v=umIeYcQLABg', '_blank');});
