@@ -455,13 +455,14 @@ p {
     font-family: 'Orbitron', sans-serif;;
 }
 
-/* .productionCompanies {
-    width: 100%;
+.productionCompanies {
+    display: flex;
+    justify-content: center;
 }
 
 #production {
-    size: 200px;
-} */
+    height: 100px;
+} 
 
 .footer {
     position: relative;
