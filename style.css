@@ -546,3 +546,11 @@ p {
     overflow: hidden;
 }
 
+.aboutImage {
+    height: 200px;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+}

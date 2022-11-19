@@ -452,7 +452,7 @@ const aboutPage = () => {
   <div class="aboutContainer">
   <p class="aboutText">"We're just trying to survive"</p>
   <p class="aboutText2"> -Menar Nelson</p>
-  
+  <p class= "imageContainer"><img class="aboutImage" src="./macarena-skeleton.gif"></p>
   
   </div>
   
