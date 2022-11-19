@@ -283,6 +283,7 @@ h4 {
 .someImages {
     border-radius: 70px;
     border: solid rgb(55, 21, 21); 
+    object-fit: cover;
 }
 
 h5 {
@@ -455,14 +456,19 @@ p {
     font-family: 'Orbitron', sans-serif;;
 }
 
-.productionCompanies {
+ .productionCompanies {
     display: flex;
     justify-content: center;
+    border-radius: 40px;
+    font-size: 18px;
+    color: rgb(185, 42, 42);
+    font-family: 'Orbitron', sans-serif;;
 }
 
 #production {
     height: 100px;
-} 
+    border-radius: 40px;
+}  
 
 .footer {
     position: relative;
@@ -502,4 +508,28 @@ p {
     display: flex;
     justify-content: center;
     gap: 25px;
+}
+
+.aboutContainer {
+    background-color: rgba(62, 20, 20, 0.187);
+    height: 500px;
+    width: 100%;
+}
+
+.aboutText {
+    font-size: 50px;
+    color: rgb(185, 42, 42);
+    font-family: 'Orbitron', sans-serif;;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.aboutText2 {
+    font-size: 20px;
+    color: rgb(185, 42, 42);
+    font-family: 'Orbitron', sans-serif;;
+    display: flex;
+    justify-content: end;
+    margin-right: 120px;
 }

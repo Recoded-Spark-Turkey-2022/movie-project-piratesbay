@@ -414,3 +414,22 @@ searchInput.addEventListener("input", (e) => {
     })
   })
 })
+
+const aboutPage = () => {
+  CONTAINER.innerHTML=`
+  <div class="aboutContainer">
+  <p class="aboutText">"We're just trying to survive"</p>
+  <p class="aboutText2"> -Menar Nelson</p>
+  
+  
+  </div>
+  
+  
+  `
+}
+
+const aboutBtn = document.querySelector(".aboutBtn");
+aboutBtn.addEventListener("click", () => {
+  CONTAINER.innerHTML = "";
+  aboutPage();
+});
