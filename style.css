@@ -64,7 +64,7 @@ nav {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(0, 0, 0, 0.3);
-    z-index: 9;
+    z-index: 200;
 
 }
 
@@ -219,7 +219,7 @@ h4 {
     transform: translateX(0);
     transition: all 1s ease-in-out;
     overflow: hidden;
-    z-index: -1 !important;
+    z-index: 100;
 }
 
 .movieDiv {
@@ -312,11 +312,12 @@ p {
 
 .titles {
     color: rgba(186, 30, 30, 0.687);
-    font-size: 18px;
+    font-size: 13px;
     font-family: 'Orbitron', sans-serif;
     display: flex;
     justify-content: center;
-    margin: 0px;
+    width: 110px;
+    
 }
 
 
@@ -359,9 +360,143 @@ p {
 .two {
   position: absolute;
   margin-left: 40%;
-  margin-top: 25%;
+  margin-top: 29%;
   width: 90%;
 }
+
+.actorDiv {
+    margin: 30px;
+}
+
+#biography {
+    display: flex;
+    width: 100%;
+}
+
+#actor-backdrop {
+    border-radius: 70px;
+    border: solid rgb(55, 21, 21);
+}
+
+
+.actorRelatedMovies {
+    border-radius: 70px;
+    display: flex;
+    justify-content: space-between;
+    height: 170px;
+    width: 120px;
+    margin-left: 90px;
+    margin-top: 50px;
+    cursor: pointer;
+    border: solid rgb(55, 21, 21);
+}   
+
+#titles1 {
+  margin-left: 30%;
+}
+
+.actorsPage {
+    display: flex;
+    margin-top: 1rem;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+}
+
+.actorsImages {
+    border-radius: 70px;
+    margin: 10px;
+    cursor: pointer;
+    border: solid rgb(55, 21, 21);
+   
+}
+
+#actorsNames {
+    font-size: 20px;
+   
+}
+
+.actorsImages:hover {
+        transform: scale(1);
+        margin: 0 10px;
+        cursor: pointer;
+}
+
+.actorsCards {
+   display: flex;
+   justify-content: center;
+   margin-top: 5px;
+}
+
+.genre {
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.navbar {
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.dropdown-content {
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.filter {
+    font-family: 'Orbitron', sans-serif;;
+    font-size: 10px;
+}
+
+.dropbtn {
+    font-family: 'Orbitron', sans-serif;;
+}
+
+.productionCompanies {
+    display: flex;
+    justify-content: center;
+}
+
+#production {
+    height: 100px;
+} 
+
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(68, 56, 56, 0.176);
+    color: white;
+    text-align: center;
+  }
+
+  .footerImage {
+    margin-top: 10px;
+    height: 60px;
+    width: 60px;
+    border-radius:20px;
+    border: solid  rgba(41, 7, 7, 0.205);
+    cursor: pointer;
+}
+
+  .footerDesign {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footerText {
+    font-size: 12px;
+    color: rgb(227, 158, 136);
+    margin-top: 10px;
+    font-family: 'Orbitron', sans-serif;;
+    display: flex;
+    justify-content: center;
+  }
 
 .actorsContainer {
     display: flex;
