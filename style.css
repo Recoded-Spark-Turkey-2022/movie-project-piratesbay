@@ -362,3 +362,9 @@ p {
   margin-top: 25%;
   width: 90%;
 }
+
+.actorsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
